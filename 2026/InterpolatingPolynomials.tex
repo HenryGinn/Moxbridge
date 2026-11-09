@@ -1,0 +1,93 @@
+\question
+\tocsection{The Lagrange Interpolating Polynomial}
+
+Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued function $f$, there exists a polynomial, $p$, of degree at most $n$ that interpolates $f$ at these points. That is $y_i = f(x_i) = p(x_i)$ for all $x_i$, $i = 0, 1, \dots, n-1, n$. This polynomial is unique and is known as the Lagrange Interpolating Polynomial, or simply the Lagrange Polynomial.
+
+\begin{parts}
+
+\part \label{que:InterpolatingPolynomials_Beginner} If $f$ is a quartic polynomial satisfying $f(1) = 1$, $f(2) = 4$, $f(3) = 9$, $f(4) = 16$, and $f(5) = 35$, determine $f(6)$. Note that $f(5) \ne 5^2$.
+
+\begin{hints}
+	\begin{enumerate}
+		\item Consider the function $g(x) = f(x) - x^2$.
+		\item Note that $g(x)$ is also a quartic polynomial and has roots at 1, 2, 3, 4.
+		\item As $g(x)$ is a quartic, by the factor theorem it must be of the form $\lambda(x-1)(x-2)(x-3)(x-4)$ for some $\lambda \in \mathbb{R}$.
+	\end{enumerate}
+\end{hints}
+
+\begin{solution}
+\label{sol:InterpolatingPolynomials_Beginner}
+Building on the hints, we only need to determine $\lambda$ to completely determine $g(x)$ and thus $f(x)$. This can be done with simple algebra as we know that $g(5) = f(5) - 5^2 = 10$, but we can make our lives easier. Consider the function given in equation~\ref{eqn:InterpolatingPolynomials_Beginner}. When we substitute in $x = 5$, the whole fraction simplifies to 1 and gives $\mu = 10$. Note that we are free to do this as the denominator is simply a constant so $h(x)$ is in exactly the same form as $g(x)$. Determining $h(6)$ causes diagonally adjacent factors in the fraction to cancel and we get $h(6) = 10 \cdot \frac{6-1}{5-4} = 50$, therefore $f(6) = 6^2 + 50 = 86$.
+\begin{equation}
+	h(x) = \mu \frac{(x-1)(x-2)(x-3)(x-4)}{(5-1)(5-2)(5-3)(5-4)}
+	\label{eqn:InterpolatingPolynomials_Beginner}
+\end{equation}
+
+\end{solution}
+
+\part \label{que:InterpolatingPolynomials_Intermediate} $f$ is a degree $n$ polynomial satisfying $f(k) = k^2$ for $k = 0, \dots, n-1$ and $f(n) = \alpha$. By using the ideas used in part~\ref{que:InterpolatingPolynomials_Beginner} or otherwise, determine $f(x)$. You do not need to give your answer in the form $a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0$.
+
+\begin{solution}
+\label{sol:InterpolatingPolynomials_Intermediate}
+We follow the same procedure from \ref{sol:InterpolatingPolynomials_Beginner}, but with more generality. The corresponding $h(x)$ can be written down immediately as in equation~\ref{eqn:InterpolatingPolynomials_Intermediate} and the final answer is given as $f(x) = h(x) + x^2$.
+\begin{equation}
+	h(x) = \alpha \cdot \frac{\prod_{k=1}^n (x-k)}{\prod_{k=1}^n (n-k)}
+	\label{eqn:InterpolatingPolynomials_Intermediate}
+\end{equation}
+
+\end{solution}
+
+\part \label{que:InterpolatingPolynomials_Existence} By using the ideas you may have used in part~\ref{que:InterpolatingPolynomials_Intermediate} or otherwise, find an explicit formula for an interpolating polynomial. This polynomial does not necessarily need to be of minimum order.
+
+\begin{hints}
+	\begin{enumerate}
+		\item Use linearity - the finite sum of a collection of polynomials is also a polynomial.
+		\item Find a way to focus on one point at a time.
+		\item Use the factor theorem - a polyomial has a root at $x_0$ if and only if the polynomial is a multiple of $x - x_0$.
+	\end{enumerate}
+\end{hints}
+
+\begin{solution}
+\label{sol:InterpolatingPolynomials_Existence}
+The key to this problem is to use the fact that polynomials can be added to get another polynomial. This allows us to isolate each point in the following way. For each point, $(x_i, y_i)$, we can find a polynomial, $p_i(x)$, that is $0$ when evaluated on all $x_j$ where $j \ne i$ and satisfies $p(x_i) = y_i$. The sum of these polynomials gives us an interpolating polynomial by equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialInterpolates} ($\delta_{ij} = 0$ if and only if $i = j$).
+\begin{equation}
+	p(x_i) = \sum_j^n p_j(x_i) = \sum_j^n y_i \delta_{ij} = y_i
+	\label{eqn:InterpolatingPolynomials_LagrangePolynomialInterpolates}
+\end{equation}
+
+The problem now reduces to finding each of the $p_i$. In fact we can simplify the problem further as we only need to find a function, $q_i$, that is $0$ for $x_j$ for $j \ne i$ and satisfies $q_i(x_i) \ne 0$. Once such a function has been found, we can define $p_i$ as in equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningPi}. The factor theorem can then be used to deduce $q_i$ as follows: $x_0$ is a root of $p$ if and only if $x - x_0$ divides $p(x)$. This gives $q_i$ as the product in equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningQi}. The final polynomial is given in equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningP} by combining these parts.
+\begin{subequations}
+	\begin{equation}
+		p_i(x) = \frac{q_i(x)}{q_i(x_i)} \cdot y_i
+		\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningPi}
+	\end{equation}
+	\begin{equation}
+		q_i(x) = \prod_{\substack{j=1 \\ j \ne i}}^n (x - x_j)
+		\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningQi}
+	\end{equation}
+	\begin{equation}
+		p(x) = \sum_{i=1}^n \prod_{\substack{j=1 \\ j \ne i}}^n \frac{x - x_i}{x_j - x_i} y_i
+		\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningP}
+	\end{equation}
+\end{subequations}
+
+\end{solution}
+
+\part \label{que:InterpolatingPolynomials_Uniqueness} Show that there is only one interpolating polynomial of minimal order. That is, if for all $x_i$, $i = 0, 1, \dots n-1, n$ we have $p(x_i) = f(x_i) = q(x_i)$ then $p(x) = q(x)$ for all $x \in \mathbb{R}$. Deduce that all polynomials of degree $n$ or less that interpolate $n + 1$ points must be of minimum order.
+
+\begin{hints}
+	\begin{itemize}
+		\item Consider $p(x) - q(x)$.
+		\item What are the roots of $p(x) - q(x)$?
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+
+As both $p$ and $q$ are interpolating polynomials, $p(x_i) - q(x_i) = 0$ for all $x_i$. As $p(x) - q(x)$ is of degree $n$ and has roots at $n + 1$ points, it must be identically 0. This can be seen by the factor theorem as $p(x) - q(x) = \prod_{i=0}^n \lambda (x - x_i)$ for some $\lambda \in \mathbb{R}$, yet for $\lambda \ne 0$ the right hand side has degree $n + 1$. We conclude that $\lambda = 0$ and that $p(x) = q(x)$.
+
+If there is some polynomial, $p$, that interpolates $f$ at $n + 1$ points then it necessarily agrees with the interpolating polynomial of minimal degree at these points. By the previous argument we must have that $p$ is identically equal to the polynomial of minimal degree.
+
+\end{solution}
+
+\end{parts}

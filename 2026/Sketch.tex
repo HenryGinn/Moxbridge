@@ -1,0 +1,67 @@
+\question
+\tocsection{Sketch of a Graph}
+
+Sketch $f(x) = \sin{\frac{1}{x^2}}$.
+
+\begin{solution}
+Before we start thinking about what shape the function is, we make a comment about its domain. $\sin$ is defined on all real numbers (and even complex numbers), but $\frac{1}{x^2}$ is not defined at $x = 0$. We conclude that $f$ is defined for all non-zero real numbers and that there may be some strange behaviour around 0.
+
+We can simplify the problem by noting symmetries. We see that $\sin$ is an odd function and $\frac{1}{x^2}$ is an even function. The composition of an even function with an odd function is an even function so we expect the graph to be symmetrical about the $y$-axis.
+
+There are two natural limits to consider, $x \to \pm \infty$ and, as noted earlier, $x \to 0$. As $x \to \pm\infty$, $\frac{1}{x^2} \to 0$ and $\sin{0} = 0$, therefore we expect $f$ to converge to 0 in both directions. Strong candidates may also note that we have moved the limit inside the function so we need to be careful, but this is valid because $\sin$ is continuous. As $x \to 0$, $\frac{1}{x^2} \to \infty$, and $\sin{t}$ oscillates as $t$ increases, therefore we expect oscillatory behaviour at 0. The function must oscillate between -1 and 1 so the function cannot be extended to a value at 0.
+
+$\sin$ has a fixed period but $\frac{1}{x^2}$ increases faster than linearly as $x \to 0$ so we expect the oscillations to get faster. The period of $\sin$ is $2\pi$, and $\frac{1}{x_n^2} = 2n\pi\, n \in \mathbb{N} \quad \implies x_n = \frac{1}{\sqrt{2n\pi}}$. We can compute the gap between periods, $x_{n+1} - x_n$, explicitly and using $\sqrt{1+1/n} = 1 + \frac{1}{2n} + \mathcal{O}(\frac{1}{n^2})$ we see that size of the gaps are $n^{-\frac{3}{2}}$ to leading order.
+
+Finally we determine the sign of $f(x)$ as $x \to \pm \infty$. As $\frac{1}{x^2}$ is small and positive and $\sin(t) > 0$ for small values of $t$ we see that $f(x)$ is also positive for large enough $|x|$. A plot of $f$ is shown below in figure~\ref{fig:PlotOfSketch}.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=0.9\textwidth,
+			axis lines=middle,
+			xlabel={$x$},
+			ylabel={$y$},
+			domain=-5.3:5.3,
+			ymin=-1.1,
+			ymax=1.1,
+			grid=both,
+			]
+			% Left branch
+			\addplot[
+				purple,
+				thick,
+				domain=-5:-0.1,
+				samples=5000
+			]
+			{sin(deg(1/x^2))};
+			\addplot[
+			purple,
+			thick,
+			domain=-0.1:-0.03,
+			samples=10000
+			]
+			{sin(deg(1/x^2))};
+			
+			% Right branch
+			\addplot[
+				purple,
+				thick, 
+				domain=0.1:5,
+				samples=5000
+			]
+			{sin(deg(1/x^2))};
+			\addplot[
+				purple,
+				thick, 
+				domain=0.03:0.1,
+				samples=10000
+			]
+			{sin(deg(1/x^2))};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{$y = \sin{\frac{1}{x^2}}$}
+	\label{fig:PlotOfSketch}
+\end{figure}
+
+\end{solution}

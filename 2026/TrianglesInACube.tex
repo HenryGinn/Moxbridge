@@ -1,0 +1,119 @@
+\question
+\tocsection{Triangles in a Cube}
+
+How many equilateral triangles can be formed by connecting three vertices of a cube?
+
+\begin{hints}
+
+\begin{enumerate}
+	\item Explore the problem. For example, if one of the edges of the cube is included in the triangle, what are the possible triangles you get by adding one of the other vertices?
+	\item If a triangle shares an edge with the cube, it must be a right-angled triangle.
+	\item Equilateral triangles have rotational symmetry of order 3 - where on a cube do you find such a symmetry?
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+	
+	Place three points overlapping at a vertex of the cube. There are three edges connected to this vertex, and we move the points along each of the edges. If all points move along their edge at the same rate then they will form an equilateral triangle by symmetry. Eventually they hit the vertex at the end of the edge, and thus we have found three vertices that form an equilateral triangle. We note that each triangle generated this way cannot be reached by starting at any other vertex, thus we have one triangle per vertex and the final answer is at least 8. This process is demonstrated in figure~\ref{fig:TrianglesInACube_MovingAwayFromVertex}. The red triangle shows the intermediate step where the points are partially along the edges and the blue triangle shows where it stops.
+	
+	\begin{figure}[H]
+		\begin{center}
+			\begin{tikzpicture}[scale=4]
+				
+				\input{TrianglesInACube_CubeCoordinates}
+				
+				\def\d{0.4}
+				\coordinate (T1) at (\d,1,1);
+				\coordinate (T2) at (1,\d,1);
+				\coordinate (T3) at (1,1,\d);
+				
+				\filldraw[
+				fill=blue!40,
+				draw=dark,
+				blend mode=normal,
+				fill opacity=0.4
+				] (011) -- (101) -- (110) -- cycle;
+				
+				\filldraw[
+				fill=red!40,
+				draw=dark,
+				blend mode=normal,
+				fill opacity=0.4
+				] (T1) -- (T2) -- (T3) -- cycle;
+				
+				\input{TrianglesInACube_CubeEdges}
+				
+			\end{tikzpicture}
+			\caption{Three points moving away from a vertex at the same rate form an equilateral triangle by symmetry.}
+			\label{fig:TrianglesInACube_MovingAwayFromVertex}
+		\end{center}
+	\end{figure}
+
+Another way of producing this lower bound is by considering symmetry. There are 24 orientation-preserving symmetries of the vertices of a cube which form the $O$ group. The vertices of an equilateral triangle have 3 orientation-preserving symmetries and form the $C_3$ group. The quotient set $O/C_3$ has size $|O / C_3| = \frac{|O|}{|C_3|} = \frac{24}{3} = 8$ which shows there are at least eight triples of vertices with threefold rotational symmetry, in other words, the equilateral triangles. This is only a lower bound because we could have shapes such as two cubes next to each other that share a face. This shape has 8 symmetries which is not a multiple of three, yet clearly it has at least 16 equilateral triangles in it.
+
+We can confirm that the triangles associated with each vertex are the only such equilateral triangles by classifying all triangles within the cube. If we have lower bounds for all types of triangle which sum to the total number of triangles then our bounds must be tight. We will find it helpful to first define the distance between two points to be the minimum number of edges of the cube needed to be traversed to navigate from one point to the other.
+
+Consider a triangle that shares an edge with the cube - we will call this the base edge. If the remaining vertex is within a distance of one from the base edge the three edges will lie on the same face. There are four triangles per face and six faces of the cube so there are 24 such triangles. The furthest a vertex can be from the base edge is a distance of two, occuring when it lives on the edge opposite the base edge. There are twelve choices for the base edge and two possible vertices a distance of two away, giving 24 such cases. All 48 of these cases are right-angled, therefore we are done as there are 56 possible triangles.
+
+Even though we have already identified all the triangles, for the sake of interest we see we could have found them by continuing our classification. We cannot have edges within a distance of 1 of each other or we will find ourselves in the first two cases considered. The furthest apart two vertices can be is a distance of three, but then anywhere we put the third vertex must be within a distance of one of an existing vertex. Having two vertices a distance of three apart is in fact the same as our second case. The only remaining case is where all vertices are a distance of two apart from each other which are our equilateral triangles. All three cases are summarised in~\ref{tab:TrianglesInACube_EnumeratingTriangles} and shown in figure~\ref{fig:TrianglesInACube_Cases}.
+
+\begin{table}[H]
+	\centering
+	\caption{Enumerating all possible triangles formed by connecting vertices of a cube.}
+	\label{tab:TrianglesInACube_EnumeratingTriangles}
+	\begin{tabular}{cc}
+		\toprule
+		Classification & Number of triangles \\
+		\midrule
+		Contained within a face & $4 \cdot 6 = 24$ \\
+		Only one edge within a face & $12 \cdot 2 = 24$ \\
+		All edges are internal & $8$ \\
+		\midrule
+		Total & ${{8}\choose{3}} = 56$ \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.33\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=3]
+			
+			\input{TrianglesInACube_CubeCoordinates}
+			\input{TrianglesInACube_CubeEdges}
+			\filldraw[fill=blue!40, draw=dark, fill opacity=0.4] (001) -- (101) -- (011) -- (001);
+			
+		\end{tikzpicture}
+		\caption{Contained within a face}
+		\label{fig:TrianglesInACube_Case1}
+	\end{subfigure}%
+	\begin{subfigure}{0.33\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=3]
+			
+			\input{TrianglesInACube_CubeCoordinates}
+			\input{TrianglesInACube_CubeEdges}
+			\filldraw[fill=blue!40, draw=dark, fill opacity=0.4] (001) -- (101) -- (010) -- (001);
+			
+		\end{tikzpicture}
+		\caption{Only one edge within a face}
+		\label{fig:TrianglesInACube_Case2}
+	\end{subfigure}%
+	\begin{subfigure}{0.33\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=3]
+			
+			\input{TrianglesInACube_CubeCoordinates}
+			\input{TrianglesInACube_CubeEdges}
+			\filldraw[fill=blue!40, draw=dark, fill opacity=0.4] (001) -- (111) -- (010) -- (001);
+			
+		\end{tikzpicture}
+		\caption{All edges are internal}
+		\label{fig:TrianglesInACube_Case3}
+	\end{subfigure}
+	\caption{Examples of the three distinct ways a triangle can be inscribed within a cube.}
+	\label{fig:TrianglesInACube_Cases}
+\end{figure}
+
+\end{solution}

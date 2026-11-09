@@ -1,0 +1,244 @@
+\question
+\tocsection{The Ball and the Boat}
+
+A ball is in a boat floating in a pool of water, as shown in figure~\ref{fig:TheBallAndTheBoat_Question}. In the following scenarios, does the water level go up, go down, or stay the same?
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.8]
+		
+		\input{TheBallAndTheBoat_Coordinates}
+		
+		\coordinate (BallCentre) at ($(\BoatCentreX, \BoatBottom + \BallRadius)$); 
+		\filldraw[red!20, draw=dark] (BallCentre) circle (\BallRadius);
+		
+	\end{tikzpicture}
+	\caption{A boat with a ball in it floating in a pool.}
+	\label{fig:TheBallAndTheBoat_Question}
+\end{figure}
+
+\begin{parts}
+
+\part The ball is thrown into the water and floats.
+\label{que:TheBallAndTheBoat_Floating}
+
+\begin{hints}
+
+\begin{enumerate}
+	\item Draw a force diagram for before and after the ball is put in the water.
+	\item Archimedes' principle states that the weight of water displaced by an object is equal to the buoyancy force (upthrust) acting upwards on that object.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+The key to this question is understanding the forces acting, in particular whether the buoyancy force acts due to the weight of the ball or the volume of the ball. When the ball is in the boat the water level is a function only of the ball's weight and is independent of the ball's volume. When the ball is floating in the water there are only two forces acting on it - the upthrust from the buoyancy of the ball and the weight, as shown in figure~\ref{fig:TheBallAndTheBoat_Floating}.
+
+The ball is in equilibrium so by Newton's first law the forces acting on the ball must be in balance, therefore $U_\text{Ball} = W_\text{Ball}$. By Archimedes' principle, the upthrust acting on the ball is also equal to the weight of the water displaced by the ball. The total weight of water displaced is therefore equal to the weight of the boat and the weight of the ball, exactly the same weight that was displaced when the ball in the boat, as shown in figure~\ref{fig:TheBallAndTheBoat_BallInBoat}.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=0.8]
+			
+			\input{TheBallAndTheBoat_Coordinates}
+			
+			\coordinate (BallCentre) at ($(\BoatCentreX, \BoatBottom + \BallRadius)$); 
+			\filldraw[red!20, draw=dark] (BallCentre) circle (\BallRadius);
+			
+			\coordinate (BallAbove) at ($(BallCentre) + (0, \BallRadius + \ArrowOffsetY)$);
+			\coordinate (BallBelow) at ($(BallCentre) - (0, \BallRadius + \ArrowOffsetY)$);
+			
+			\draw[<-, myblack] ($(BallAbove) + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$U_\text{Ball and Boat}$} -- (BallAbove);
+			\draw[<-, dark] ($(BallBelow) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$W_\text{Ball and Boat}$} -- (BallBelow);
+			
+		\end{tikzpicture}
+		\caption{Forces on the ball and boat system}
+		\label{fig:TheBallAndTheBoat_BallInBoat}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=0.8]
+			
+			\input{TheBallAndTheBoat_Coordinates}
+			
+			\input{TheBallAndTheBoat_BoatLabels}
+			
+			\coordinate (BallCentre) at (\BallCentreX, \WaterLevel); 
+			\filldraw[red!20, draw=dark] (BallCentre) circle (\BallRadius);
+			
+			\coordinate (BallAbove) at ($(BallCentre) + (0, \BallRadius + \ArrowOffsetY)$);
+			\coordinate (BallBelow) at ($(BallCentre) - (0, \BallRadius + \ArrowOffsetY)$);
+			
+			\draw[<-, myblack] ($(BallAbove) + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$U_\text{Ball}$} -- (BallAbove);
+			\draw[<-, dark] ($(BallBelow) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$W_\text{Ball}$} -- (BallBelow);
+			
+		\end{tikzpicture}
+		\caption{The ball floating on the surface}
+		\label{fig:TheBallAndTheBoat_Floating}
+	\end{subfigure}
+	\caption{Comparing the forces on the ball and boat system to the separated ball and boat systems.}
+	\label{fig:TheBallAndTheBoat_BeforeAndAfter}
+\end{figure}
+
+As the density of water is the same before and after the ball is removed from the boat, the volume of water displaced is proportional to the mass of water displaced. As the strength of gravity is also constant, the mass of water displaced is proportional to the weight of water displaced. The water level is a strictly increasing function of the volume of water displaced, and putting all these relationships together we deduce that the water level stays the same.
+
+\end{solution}
+
+\part The ball is thrown into the pool and sinks.
+\label{que:TheBallAndTheBoat_Sinks}
+
+\begin{hints}
+
+\begin{enumerate}
+	\item An object sinks if the upthrust is less than its weight. How does the system remain in equilibrium?
+	\item Compare forces before and after the ball is removed from the boat.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+In this situation the ball is sufficiently dense where it cannot displace enough water to produce a large enough buoyancy force to support its own weight. The bottom of the pool therefore needs to provide a reaction force acting upwards on the ball to keep the ball in equilibrium, as shown in figure~\ref{fig:TheBallAndTheBoat_RestingOnBottom}.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.8]
+		
+		\input{TheBallAndTheBoat_Coordinates}
+		
+		\input{TheBallAndTheBoat_BoatLabels}
+		
+		\coordinate (BallCentre) at ($(\BallCentreX, \BallRadius)$); 
+		\filldraw[red!20, draw=dark] (BallCentre) circle (\BallRadius);
+		
+		\coordinate (BallAboveLeft)  at ({\BallCentreX - \ArrowOffsetX}, {\BallRadius*3/2 + \ArrowOffsetY});
+		\coordinate (BallAboveRight) at ({\BallCentreX + \ArrowOffsetX}, {\BallRadius*3/2 + \ArrowOffsetY});
+		\coordinate (BallBelow) at (\BallCentreX, -\ArrowOffsetY);
+		
+		\draw[<-, dark] ($(BallAboveLeft)  + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$N$} -- (BallAboveLeft);
+		\draw[<-, dark] ($(BallAboveRight) + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$U_\text{Ball}$} -- (BallAboveRight);
+		\draw[<-, myblack] ($(BallBelow) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$W_\text{Ball}$} -- (BallBelow);
+		
+	\end{tikzpicture}
+	\caption{The ball resting on the bottom of the pool.}
+	\label{fig:TheBallAndTheBoat_RestingOnBottom}
+\end{figure}
+
+The total downwards force acting on the ball and the boat combined is the same as when the ball was in the boat, $W_\text{Ball} + W_\text{Boat}$. As the total upwards force includes a strictly positive normal force, $N$, we must have $W_\text{Ball} + W_\text{Boat} > U_\text{Ball} + U_\text{Boat}$. By the logic used to relate buoyancy forces to the water level from part~\ref{que:TheBallAndTheBoat_Floating} we conclude that the water level must decrease.
+
+Another approach is to consider an extremely dense ball. When in the boat, the ball would cause a large volume of water to be displaced due to having a large weight, but when outside the boat the ball would displace very little due to its low volume. Comparing these situations means we can conclude that the water level decreases.
+
+\end{solution}
+
+\needspace{10\baselineskip}
+\part The ball is thrown into the pool and floats, but is then tied to the bottom of the pool so it is completely submerged.
+\label{que:TheBallAndTheBoat_TiedToTheBottom}
+
+\begin{solution}
+
+This is the opposite situation to part~\ref{que:TheBallAndTheBoat_Sinks} where we have a tension acting downwards instead of a normal force acting upwards. The forces are shown in figure~\ref{fig:TheBallAndTheBoat_TiedToTheBottom} and a very similar argument shows that the water level increases. The analogue of the extremely dense ball argument instead uses an extremely low-density ball with similar reasoning.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.8]
+		
+		\input{TheBallAndTheBoat_Coordinates}
+		
+		\input{TheBallAndTheBoat_BoatLabels}
+		
+		\def\BallCentreY{0.5};
+		\coordinate (BallCentre) at ($(\BallCentreX, {\BallRadius + \BallCentreY})$); 
+		\draw[dark] (BallCentre) -- (\BallCentreX, 0);
+		\filldraw[red!20, draw=dark] (BallCentre) circle (\BallRadius);
+		
+		\coordinate (BallBelowLeft)  at ({\BallCentreX - \ArrowOffsetX}, -\ArrowOffsetY);
+		\coordinate (BallBelowRight) at ({\BallCentreX + \ArrowOffsetX}, -\ArrowOffsetY);
+		\coordinate (BallAbove) at (\BallCentreX, {\BallCentreY + \BallRadius*3/2 + \ArrowOffsetY});
+		
+		\draw[<-, myblack] ($(BallBelowLeft) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$T$} -- (BallBelowLeft);
+		\draw[<-, myblack] ($(BallBelowRight) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$W_\text{Ball}$} -- (BallBelowRight);
+		\draw[<-, dark] ($(BallAbove) + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$U_\text{Ball}$} -- (BallAbove);
+		
+	\end{tikzpicture}
+	\caption{The ball is attached to the bottom of the pool.}
+	\label{fig:TheBallAndTheBoat_TiedToTheBottom}
+\end{figure}
+
+\end{solution}
+
+\part The ball is thrown into the pool and floats, but someone sitting in the boat pushes the ball underwater so that it is completely submerged.
+
+\begin{solution}
+
+\begin{hints}
+
+\begin{enumerate}
+	\item Follow the same method as in parts~\ref{que:TheBallAndTheBoat_Sinks} and~\ref{que:TheBallAndTheBoat_TiedToTheBottom}.
+	\item How is this situation the same as part~\ref{que:TheBallAndTheBoat_Floating}?
+\end{enumerate}
+
+\end{hints}
+
+This case has almost identical logic to part~\ref{que:TheBallAndTheBoat_Floating}. The force diagram is shown in figure~\ref{fig:TheBallAndTheBoat_PushedUnderwater} where the only difference is the inclusion of a force, $F$. This force acts upwards on the boat and, by Newton's third law, has an equal and opposite force that acts downwards on the ball. Comparing the total upwards and downwards forces as in parts~\ref{que:TheBallAndTheBoat_Sinks} and~\ref{que:TheBallAndTheBoat_TiedToTheBottom}, this force cancels out and gives the same equation that we would have found in part~\ref{que:TheBallAndTheBoat_Floating}. We conclude that the water level stays the same.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.8]
+		
+		\input{TheBallAndTheBoat_Coordinates}
+		
+		\coordinate (AboveBoat) at ($(BoatCentre) + (0, \ArrowOffsetY)$);
+		\coordinate (BelowBoat) at ($(BoatCentre) - (0, \ArrowOffsetY)$);
+		
+		\coordinate (AboveBoatLeft)  at ($(AboveBoat) - (\ArrowOffsetX, 0)$);
+		\coordinate (AboveBoatRight) at ($(AboveBoat) + (\ArrowOffsetX, 0)$);
+		
+		\draw[<-, myblack] ($(AboveBoatLeft)  + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$F$} -- (AboveBoatLeft);
+		\draw[<-, myblack] ($(AboveBoatRight) + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$U_\text{Boat}$} -- (AboveBoatRight);
+		\draw[<-, dark] ($(BelowBoat) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$W_\text{Boat}$} -- (BelowBoat);
+		
+		\def\BallCentreY{0.5};
+		\coordinate (BallCentre) at ($(\BallCentreX, {\BallRadius + \BallCentreY})$); 
+		\coordinate (BallCentre) at (\BallCentreX, {\WaterLevel - \BallRadius*3/2}); 
+		\filldraw[red!20, draw=dark] (BallCentre) circle (\BallRadius);
+		
+		\coordinate (BallBelowLeft)  at ($(BallCentre) + (-\ArrowOffsetX, -\BallRadius/2 - \ArrowOffsetY)$);
+		\coordinate (BallBelowRight) at ($(BallCentre) + (+\ArrowOffsetX, -\BallRadius/2 - \ArrowOffsetY)$);
+		\coordinate (BallAbove) at ($(BallCentre) + (0, \BallRadius*3/2 + \ArrowOffsetY)$);
+		
+		\draw[<-, dark] ($(BallBelowLeft) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$F$} -- (BallBelowLeft);
+		\draw[<-, dark] ($(BallBelowRight) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$W_\text{Ball}$} -- (BallBelowRight);
+		\draw[<-, myblack] ($(BallAbove) + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$U_\text{Ball}$} -- (BallAbove);
+		
+	\end{tikzpicture}
+	\caption{The ball is fully submerged because it is pushed under the water.}
+	\label{fig:TheBallAndTheBoat_PushedUnderwater}
+\end{figure}
+
+\end{solution}
+
+\needspace{10\baselineskip}
+\part The water in the pool is saltwater and the ball is made of ice (the ball can be assumed to be purely frozen freshwater). What happens when the ball melts?
+
+\begin{hints}
+
+\begin{enumerate}
+	\item There are three densities involved here - $\rho_\text{ice}$, $\rho_\text{freshwater}$, and $\rho_\text{saltwater}$ - be careful to be precise which one you are referring to.
+	\item In the previous parts the ball was a rigid body but that is no longer the case once the ball has melted - how does this change things?
+	\item Even though saltwater is denser than freshwater, the melted ball cannot float above the surface because it is a fluid.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+We can simplify the problem by realising that the relative density of ice to that of saltwater or freshwater does not matter. The density of ice only effects the volume of the ball when it is in the boat which does not have any influence on the level of the water.
+
+The volume of water displaced is equal to $(m_\text{Ball} + m_\text{Boat})\cdot \rho_\text{saltwater} \cdot g$ when the ball is in the boat as before. When the ball is melted in the pool, the contribution of the volume of water displaced due to the boat is the same as before, $m_\text{Boat} \cdot \rho_\text{saltwater} \cdot g$, but the contribution from the ball is different. The melted water displaces $m_\text{Ball} \cdot \rho_\text{freshwater} \cdot g$ as it is completely submerged within the saltwater. As $\rho_\text{saltwater} > \rho_\text{freshwater}$, a larger volume of water is displaced and thus the water level rises.
+
+\end{solution}
+
+\end{parts}

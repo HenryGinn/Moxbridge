@@ -1,0 +1,5 @@
+\coordinate (AboveBoat) at ($(BoatCentre) + (0, \ArrowOffsetY)$);
+\coordinate (BelowBoat) at ($(BoatCentre) - (0, \ArrowOffsetY)$);
+
+\draw[<-, myblack] ($(AboveBoat) + (0, \ArrowLength)$) node[above=\Above, anchor=base] {$U_\text{Boat}$} -- (AboveBoat);
+\draw[<-, dark] ($(BelowBoat) - (0, \ArrowLength)$) node[below=\Below, anchor=base] {$W_\text{Boat}$} -- (BelowBoat);

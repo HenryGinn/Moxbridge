@@ -1,0 +1,71 @@
+\question
+\tocsection{Spaced Apart in a Grid}
+
+The integers from $1$ to $n^2$ are put into an $n \times n$ grid.
+
+\begin{parts}
+	
+\part \label{que:SpaceApartInAGrid_Existence} Prove that there must exist one pair of numbers that are adjacent (either horizontally, vertically, or diagonally) that are within $n + 1$ of each other.
+
+\begin{hints}
+	
+\begin{enumerate}
+	\item Use the pigeonhole principle.
+	\item The adjacency part of the question motivates us to think about $3 \times 3$ regions. This ends up not being very useful as such regions give control over too small a region. Try and get control in another way.
+	\item Think about paths through the grid.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+	
+We first build some intuition by considering the first non-trivial case, $n = 3$. All squares other than the central square must see the central square. If the centre square as less then 5 then the difference to 9 would be greater than 4 and if the centre square is greater than 5 then the difference to 1 would be greater than 4. Therefore 5 is the best we can do and this has a gap of 4, exactly $n + 1$. Changing the value of the centre square to reduce a gap on one side causes a larger gap on the other side. This motivates thinking about paths through the grid.
+
+There are many different paths through the grid so we need a way of gaining control over them. Define a step to be a move to an adjacent square (either horizontall, vertically, or diagonally) and consider moving from one square to another and trying to minimise the number of steps taken. There are many choices that give the same number of steps and we see that as long as each step moves nearer to the second square in the direction that the two squares are greatest apart in, the number of steps will be the same. This induces a notion of distance between two squares given by the maximum of the number of horizontal steps and the number of vertical steps between the squares.
+
+$n^2$ and 1 must be connected by a path of squares at most $n - 1$ steps long. If each step was between squares that were at most $n$ apart then the largest difference that could be achieved in $n - 1$ steps would be $n^2 - n < n^2 - 1$ for $n > 1$. By the pigeonhole principle, we have proved there must exist one step between squares with a difference of $n + 1$ or higher. In fact $(n - 1)(n + 1) = n^2 - 1$ so if the smallest difference between adjacent squares was $n + 1$ then there exists a path between 1 and $n^2$ where all differences between squares on the path are equal to $n + 1$.
+
+\end{solution}
+
+\needspace{15\baselineskip}
+\part Is this bound tight? That is, does there necessarily exist a pair of numbers that are $n + 2$ apart? Either prove the result from part~\ref{que:SpaceApartInAGrid_Existence} for $n + 2$ or find a counter example.
+
+\begin{hints}
+
+\begin{enumerate}
+	\item The bound is tight.
+	\item To construct a counter example, we want numbers to be close together. Write down the $n = 5$ case for example of the simplest way of filling in the grid that might work and check whether it is a counter example. How can this be generalised?
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+The result is not true for $n + 2$. As a counter example, we fill in the $n \times n$ grid with numbers sequentially, going along the rows first. We look at column $x$ and row $y$ and consider the adjacent points. If the number lies on an edge then we consider only the adjacent points that exist. The number at this point has value $ny + x$ and we see that the differences to the adjacent points are bounded by $n + 1$, as shown explicitly in table~\ref{tab:SpacedApartInAGrid_BoundIsTight}.
+
+\begin{table}[H]
+	\centering
+	\caption{The difference in value between the number at $(x, y)$ and its adjacent neighbours.}
+	\label{tab:SpacedApartInAGrid_BoundIsTight}
+	\begin{tabular}{cccc}
+		\toprule
+		Direction & Coordinates & Value & Difference  \\
+		\midrule
+		Top Left & $(x-1, y-1)$ & $ny - n + x - 1$ & $n + 1$  \\
+		Top Centre & $(x, y-1)$ & $ny - n + x$ & $n$  \\
+		Top Right & $(x+1, y-1)$ & $ny - n + x + 1$ & $n - 1$  \\
+		Left & $(x-1, y)$ & $ny + x - 1$ & 1  \\
+		Right & $(x+1, y)$ & $ny + x + 1$ & 1  \\
+		Bottom Left & $(x-1, y+1)$ & $ny + n + x - 1$ & $n - 1$  \\
+		Bottom Centre & $(x, y+1)$ & $ny + n + x$ & $n$  \\
+		Bottom Right & $(x+1, y+1)$ & $ny + n + x + 1$ & $n + 1$  \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\vspace{-4ex}
+\phantom{ }
+
+\end{solution}
+
+\end{parts}

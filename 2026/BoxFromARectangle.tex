@@ -1,0 +1,91 @@
+\question
+\tocsection{Box From a Rectangle}
+
+Consider a rectangle with side lengths $a$ and $b$. Squares with a side length of $x$ are cut out of each corner as shown in figure~\ref{fig:BoxFromARectangle_Rectangle}. A box without a top is then formed by folding the sides up, as shown in figure~\ref{fig:BoxFromARectangle_BoxAfterFolding}. What value of $x$ maximises the volume of the box for a given $a$ and $b$?
+
+\begin{figure}[H]
+	\centering
+	\hspace{0.05\textwidth}
+	\begin{subfigure}[c]{0.39\textwidth}
+		\centering
+		\begin{tikzpicture}
+			
+			\input{BoxFromARectangleCoordinates}
+			
+			\draw (LeftBack) -- (LeftFront) -- (RightFront) -- (RightBack) -- cycle;
+			\draw[dashed] (0, 0, \x) -- (LeftBackInner) -- (\x, 0, 0);
+			\draw[dashed] (0, 0, {\b - \x}) -- (LeftFrontInner) -- (\x, 0, \b);
+			\draw[dashed] (\a, 0, \x) -- (RightBackInner) -- ({\a - \x}, 0, 0);
+			\draw[dashed] (\a, 0, {\b - \x}) -- (RightFrontInner) -- ({\a - \x}, 0, \b);
+			
+			\pic {dimension={$(LeftBack)$}{$(LeftFront)$}{0.2}{$b$}};
+			\pic {dimension={$(LeftFront)$}{$(RightFront)$}{0.15}{$a$}};
+			\pic {dimension={$(\a, 0, {\b - \x})$}{$(RightFrontInner)$}{0.25}{$x$}};
+			
+		\end{tikzpicture}
+		\caption{Cuts made into the rectangle}
+		\label{fig:BoxFromARectangle_Rectangle}
+	\end{subfigure}
+	\hspace{0.1\textwidth}
+	\begin{subfigure}[c]{0.29\textwidth}
+		\centering
+		\begin{tikzpicture}
+			
+			\input{BoxFromARectangleCoordinates}
+			
+			\coordinate (LeftBackUpper) at (\x, \x, \x);
+			\coordinate (LeftFrontUpper) at (\x, \x, {\b - \x});
+			\coordinate (RightBackUpper) at ({\a - \x}, \x, \x);
+			\coordinate (RightFrontUpper) at ({\a - \x}, \x, {\b - \x});
+			
+			\draw (LeftBackUpper) -- (LeftFrontUpper) -- (RightFrontUpper) -- (RightBackUpper) -- cycle;
+			\draw (LeftFrontInner) -- (LeftFrontUpper);
+			\draw (RightFrontInner) -- (RightFrontUpper);
+			\draw (RightBackInner) -- (RightBackUpper);
+			\draw (LeftFrontInner) -- (RightFrontInner) -- (RightBackInner);
+			\draw[dashed] (LeftBackInner) -- (LeftBackUpper);
+			\draw[dashed] (LeftBackInner) -- (LeftFrontInner);
+			\draw[dashed] (LeftBackInner) -- (RightBackInner);
+			
+			\pic {dimension={$(LeftFrontUpper)$}{$(LeftFrontInner)$}{0.25}{$x$}};
+			
+		\end{tikzpicture}
+		\caption{Box after folding}
+		\label{fig:BoxFromARectangle_BoxAfterFolding}
+	\end{subfigure}
+	\caption{Creating a box from a rectangle}
+	\label{fig:BoxFromARectangle_Question}
+\end{figure}
+
+\begin{hints}
+
+\begin{enumerate}
+	\item Form an equation for the volume, differentiate, set equal to 0 and solve.
+	\item You also need to prove that the value you get is a minimum.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+The height of the box is $x$ and the side lengths are $a - 2x$ and $b - 2x$. This gives the volume of the box as $f(x) = x(a - 2x)(b - 2x) = 4x^3 - 2x^2(a + b) + abx$. Differentiating gives $f'(x) = 12x^2 - 4x(a + b) + ab$ which has roots at $x_\pm = \frac{1}{6} \left( a + b \pm \sqrt{a^2 - ab + b^2} \right)$.
+
+We present two ways to show that this is a minimum. The first method uses the second derivative as given in equation~\ref{eqn:BoxFromARectangle_SecondDerivative}. This shows that $x_-$ is a maximum as desired as $f''(x_0) < 0$ and $x_+$ can be rejected.
+\begin{equation}
+	f''(x_\pm) = 24x_\pm - 4(a + b) = 4\left( a + b \pm \sqrt{a^2 - ab + b^2} - (a + b) \right) = \pm \sqrt{a^2 - ab + b^2}
+	\label{eqn:BoxFromARectangle_SecondDerivative}
+\end{equation}
+
+The second method uses the fact that geometrically we only expect a single stationary point. At $x = 0$ and $x = \min{\frac{a}{2}, \frac{b}{2}}$ the volume is 0, therefore this stationary point should be a maximum. It is therefore sufficient to reject one of the solutions we found and we do this by showing that $x_+ > \min{\frac{a}{2}, \frac{b}{2}}$. Without loss of generality we assume $a < b$ and assume for a contradiction that $x_+ < \frac{a}{2}$. This is done in equation~\ref{eqn:BoxFromARectangle_EliminateXPlus}.
+\begin{equation}
+	\begin{aligned}
+		& x_+ < \frac{a}{2}  \\
+		\implies & \frac{1}{6} \left( a + b + \sqrt{a^2 - ab + b^2} \right) < \frac{a}{2}  \\
+		\implies & a + b + \sqrt{a^2 - ab + b^2} < 3a  \\
+		\implies & a^2 - ab + b^2 < (2a - b)^2 = 4a^2 - 4ab + b^2  \\
+		\implies & 0 < 3a^2 - 3ab = 3a(a - b) < 0
+	\end{aligned}
+	\label{eqn:BoxFromARectangle_EliminateXPlus}
+\end{equation}
+
+\end{solution}

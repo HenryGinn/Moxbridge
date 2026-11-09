@@ -1,0 +1,12 @@
+\def\a{5}
+\def\b{6}
+\def\x{1.5}
+
+\coordinate (LeftBack) at (0, 0, 0);
+\coordinate (LeftFront) at (0, 0, \b);
+\coordinate (RightBack) at (\a, 0, 0);
+\coordinate (RightFront) at (\a, 0, \b);
+\coordinate (LeftBackInner) at (\x, 0, \x);
+\coordinate (LeftFrontInner) at (\x, 0, {\b - \x});
+\coordinate (RightBackInner) at ({\a - \x}, 0, \x);
+\coordinate (RightFrontInner) at ({\a - \x}, 0, {\b - \x});

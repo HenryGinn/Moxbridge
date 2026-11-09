@@ -1,0 +1,116 @@
+\question
+\tocsection{The Prisoners and the Lever}
+
+There are $n + 1$ prisoners who have been captured by an evil logician. Each prisoner is put into individual cells. One at a time, in no particular order, each prisoner will be brought into a room that has a lever in where they are given a choice of whether to change its state or not. The prisoner will then be sent back into their cell and the next prisoner brought in to the room with the lever. This process repeats until one of the prisoners announces that all prisoners have been in the room. If they are correct then all of the prisoners are free to go, although if they are wrong then the prisoners are imprisoned forever/sentenced to death.
+
+The following may be assumed.
+\begin{enumerate}
+	\item The lever has two states, up and down.
+	\item The prisoners are allowed to communicate freely before being put into their cells to agree a strategy. In particular, they know how many prisoners there are.
+	\item At any point in time for any prisoner, there exists a future point where they will be brought into the room again (unless an announcement is made before this occurs). We call this the recurrent constraint.
+	\item Standard evil logician rules apply (no funny business!).
+\end{enumerate}
+
+\begin{parts}
+
+\part \label{que:PrisonersAndTheLever_RandomDoesNotWork} If the order that the prisoners enter the room is random, define a strategy as ``Certain" if there is a probability of 1 that it succeeds. Prove that waiting a really long time and then guessing is not a certain strategy, independent of how long the wait is.
+
+\begin{hints}
+	\begin{itemize}
+		\item It is not necessary to compute the probability that all prisoners have been in the room by a certain point.
+		\item It is sufficient to show that the probability of failure is bigger than some positive number.
+		\item To better understand the definition of certainty, note that having a probability of 0 of failure does not mean that a strategy will never fail - this is only true if the sequence of prisoners is bounded in length.
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+For a strategy to fail, all we need is that the probability that a given prisoner has not entered the room at a given point is positive. The probability that any given prisoner is brought into the room with the lever on a given time step is $p = \frac{1}{n+1} < 1$. This means that the probability that they are not brought into the room on the first $N$ time steps if $(1 - p)^N$. In the limit as $N \to \infty$, this is 0, but with the ``wait a long time and guess" strategy, $N$ must be some finite number. A non-zero real number raised to a natural number is never 0. The probability that there exists at least one prisoner who has not been brought into the room with the lever by the $N$th visit is at least as big as the probability that one given prisoner has not been brought into the room. Therefore, for any value of $N$, we have bounded the probability away from 0 so we are done.
+
+\end{solution}
+
+\needspace{10\baselineskip}
+\part \label{que:PrisonersAndTheLever_EasyVersion} Find a strategy when all of the prisoners know that the lever starts in the up position.
+
+\begin{hints}
+	\begin{itemize}
+		\item The announcement that all prisoners have visited the room does not need to happen at the earliest possible moment. The only requirement is that all prisoners have been in the room at least once, meaning all prisoners may have visited the room multiple times when the announcement is made.
+		\item Whether any individual prisoner has visited the room is not important, only the total number.
+		\item Only one prisoner needs to be able to make the claim that all have visited the room.
+		\item If a prisoner flicks the lever and another prisoner flicks the lever again before the prisoner making the claim enters the room, this state will be indistinguishable to where no prisoner flicked a lever.
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+This strategy works via communicating all information to a special prisoner who will be referred to as the communicator. All other prisoners will be referred to simply as prisoners. The key is to ensure that the communicator counts each prisoner at least once, but no more. Each prisoner follows a simple rule: if the lever is up and they have not flicked it before, flick the lever down, but otherwise do nothing. If the communicator enters the room and sees the down, flick it back up, but otherwise do nothing.
+
+To understand this, consider the information that the communicator can deduce depending on what state they see the lever in. The lever being down means a prisoner who had not flicked the lever before has flicked the lever. When the communicator flicks the lever back up they reset it back into the original state, and they add one to the count of prisoners who have flicked the lever.
+
+As no prisoner can flick the lever twice, no prisoner will get double counted. As no one can flick the lever up to reset the lever other than the communicator, no prisoner can get missed. As the communicator will know how many prisoners there are due to being allowed to communicate beforehand, they will know when all prisoners have been in the room when they have counted to $n$. The existence of the communicator is why this problem was defined with $n + 1$ prisoners instead of $n$.
+
+\end{solution}
+
+\part \label{que:PrisonersAndTheLever_Robust} Define a strategy as ``Robust" if it works even when a malicious chooser decides the order that the prisoners enter the room. Prove that a robust strategy is always certain. Is your answer to part~\ref{que:PrisonersAndTheLever_EasyVersion} robust?
+
+\begin{solution}
+We consider the contrapositive statement - if a method is not certain then it is also not robust. We need to show the existence of a sequence of prisoners that causes the prisoners strategy to fail. A malicious chooser could give the same sequence, therefore making the strategy not robust. Suppose that a strategy was certain but there was no such sequence that causes the prisoners' strategy to fail. This would imply that the strategy worked 100\% of the time which contradicts the fact that the strategy was not certain.
+
+We know that the ``wait a long time and choose" strategy from part~\ref{que:PrisonersAndTheLever_RandomDoesNotWork} is not robust as it is not certain, but we can use it to build intuition about robustness. This strategy fails because the malicious chooser knows the prisoners have to make an announcement after some amount of time. Suppose one of the prisoners announces after entering the room 10,000 times, yet one of the prisoners had not entered the room once. The prisoners complain that the malicious chooser had broken the recurrent constraint, but the malicious chooser claims they planned to put the last prisoner in the room the next time. The prisoners' strategy means they must make an announcement within a finite amount of time. The malicious chooser will always have the defense that the prisoners just had not waited long enough.
+
+The solution offered to part~\ref{que:PrisonersAndTheLever_EasyVersion} is not susceptible to the same attack however. There is no limit on the amount of time that the communicator can wait until they make an announcement. If the malicious chooser refuses to put at least one of the prisoners in the room after some point, they would have broken the recurrent constraint. If there are $k$ prisoners who have not flicked the lever after $t$ room visits, then the malicious chooser must put at least one of these prisoners in the room after this point due to the recurrent constraint. This will occur after a finite amount of time and would lead to one of the $k$ prisoners flicking the lever. By the same reasoning, the communicator must subsequently be put into the room with the lever. There would then be $k - 1$ prisoners who had not entered the room and this process repeats by induction until all prisoners had been in the room with the lever.
+
+\end{solution}
+
+\part \label{que:PrisonersAndTheLever_HardVersion} Suppose that none of the prisoners know what position the lever starts in. Prove whether or not your strategy from part~\ref{que:PrisonersAndTheLever_EasyVersion} works. If it does not, find a working strategy given this additional constraint and prove whether or not your strategy is robust. Can this strategy be modified to work if a malicious actor is also allowed to flip the lever's state up to $k$ times where $k$ is known to the prisoners?
+
+\begin{hints}
+	\begin{itemize}
+		\item The strategy given as a solution to part~\ref{que:PrisonersAndTheLever_EasyVersion} does not work. If the communicator enters the room first and sees the lever down, they will not know whether this is because they are the first in the room or if another prisoner has been in before and flicked it down. If the communicator counts to $n - 1$ then either the lever started down or they have not waited long enough.
+		\item The main idea from the part~\ref{que:PrisonersAndTheLever_EasyVersion} of counting prisoners by flicking the lever down can be extended.
+		\item Consider letting prisoners flick the lever multiple times.
+		\item Use the pigeonhole principle.
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+This strategy works using the pigeonhole principle. The strategy for each prisoner is updated so that they will flick the lever down if they have flicked the lever at most once. The communicator does the same as before, flipping the lever back up to reset it and adding 1 to a count. If the lever starts in the up state, the communicator will count the lever being in the down state $2n$ times when all $n$ prisoners have flicked the lever down two times each.
+
+If the lever started in the down position however, then it is possible for the prisoners to have collectively only flicked the lever down $2n - 1$ times yet the communicator has seen the lever being down $2n$ times. This occurs when the first time the communicator enters the room the lever had not been flicked down by any prisoner, yet it started down so was counted anyway.
+
+If there were only $n - 1$ prisoners, they could collectively only flick the lever down $2n - 2$ times. Even if the lever started in the down position, the most the communicator could count to would be $2n - 1$, making it impossible for the communicator to count the lever being in the down position $2n$ times. For the communicator to count to $2n$ each of the $n$ prisoners must have been in the room at least once by the pigeonhole principle. In fact at most one prisoner could not have been in the room twice. This strategy is robust by the same argument given in part~\ref{que:PrisonersAndTheLever_Robust} but this time $k$ starts at $2n$ instead of $n$.
+
+Consider the case where the lever is known to start in the up position and the malicious chooser can flip the state of the lever a single time. This situation is very similar to not knowing the starting state of the lever without a malicious actor interfering. The difference is the timing of when the lever state changes, but this does not affect our solution. In fact we could even assume that the lever starts in the up position and consider a malicious actor who interferes up to $k + 1$ times instead. We can use this insight to modify our strategy to work when the malicious chooser flips the lever up to $k$ times.
+
+Instead of flipping twice and counting up to $2n$, prisoners flip $\alpha$ times and the communicator counts up to $\beta$ where $\alpha, \beta$ are to be determined. When the communicator makes the announcement, the others prisoners have flipped the switch at least $\beta - k$ times and at most $\beta + k$ times. If we make $\beta$ too high then it may not be possible for the prisoners to flick the lever enough for $\beta$ to be reached. This gives equation~\eqref{eqn:PrisonersAndTheLever_BetaUpperBound}. If $\beta$ is too low then our pigeonhole argument will not work as it could be possible for not all the prisoners to flick the lever yet $\beta$ is still reached. This gives equation~\eqref{eqn:PrisonersAndTheLever_BetaLowerBound}.
+\begin{subequations}
+	\begin{align}
+		&\beta \le n \alpha - k \label{eqn:PrisonersAndTheLever_BetaUpperBound}\\
+		(n - 1) \alpha + k \le &\beta \label{eqn:PrisonersAndTheLever_BetaLowerBound}
+	\end{align}\label{eqn:PrisonersAndTheLever_BetaBounds}
+\end{subequations}
+Solving these inequalities gives $\alpha \ge 2k$. To minimise the length of time the prisoners are flicking levers, we choose $\alpha$ as small as possible and get $\alpha = 2k$. Substituting into either equations in~\eqref{eqn:PrisonersAndTheLever_BetaBounds} gives $\beta = k(2n - 1)$. Note that this solution is also robust.
+
+\end{solution}
+
+\part \label{que:PrisonersAndTheLever_InitialState} Find a strategy that is certain where the initial state of the lever must also be determined. Prove whether or not this strategy is robust.
+
+\begin{hints}
+	\begin{itemize}
+		\item First determine how it is possible for the communicator to learn the state of the initial lever. There are two such cases to consider.
+		\item If the prisoners only flick the lever down, then when the lever is down the communicator can know whether this is due to them or a prisoner on all but their first visit to the room.
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+We consider two cases. Suppose prisoners can flip the lever before the communicator. The difficulty here is that the prisoner who flips would need to deduce that they are the first to flip and then signal the lever state to the communicator. Alternatively the communicator could always flip the lever first which has the advantage that they would know the starting state had been preserved. Here the difficulty is that the other prisoners must flip the lever at some point and the communicator now needs to send some sort of signal to the other prisoners that they are allowed to flip the lever.
+
+We explore the latter. The rule for the prisoners is that once they have seen the lever in both states, the lever is up, and they have not flicked it before, then flick it down\footnote{Seeing both states means someone must have flipped the lever, and as lever flipping cannot start until the communicator has flipped the lever, they know it must be safe to start flipping the lever.}. The rule for the communicator is more complicated. If they leave the room with the lever flicked up and the next time they enter they find it down, then they add one to their count. They will not announce until this count reaches $n$ as before, and by the logic of easier version this is a guarantee that all prisoners have been in the room.
+
+The complication is that the communicator will need to sometimes pull the lever down themselves. If they have left the lever up for a long time and it is not getting flicked down, then it would indicate that either a prisoner has only seen the lever in the up position, and thus has not received the signal to pull the lever down, or that prisoner has not been in the room. The communicator would flick the lever down and leave it for a while to give the other prisoners an opportunity to see it, and then flick it back up to give them an opportunity to flick it down.
+
+This strategy is not robust to malicious choosers. Suppose the lever starts in the up position and all prisoners see it. The communicator flips it down, a prisoner sees it down and flips it back up, and then the communicator enters the room again. They add one to the count and flip the lever down. The malicious chooser then repeatedly puts either the communicator or the prisoner who already flipped the lever back into the room. Eventually the communicator infers that the prisoners have not received the signal, so flicks the lever up. The malicious chooser can avoiding breaking the recurrent constraint at this stage. Eventually the communicator flips the lever back down again and the cycle repeats.
+
+If the prisoner order was random however, then there is a non-zero chance, $p$, that a given prisoner gets the signal that they can flick the lever and sees it in the up state. As $1 - (1 - p)^n \to 0$ as $n \to \infty$, the chance that the game goes on forever without the prisoner getting the opportunity to flick the lever is~0. There are a finite number of prisoners, therefore there is a probability of 1 of success.
+
+\end{solution}
+
+\end{parts}

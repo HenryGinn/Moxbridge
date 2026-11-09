@@ -1,0 +1,22 @@
+\input{WonkyChessboard_QuadrilateralCoordinates.tex}
+
+% Parallelogram
+\draw[fill = blue!20] (20) -- (42) -- (24) -- (02) -- (20);
+
+% Outer and inner lines
+\draw (00) -- (40) -- (44) -- (04) -- (00);
+\draw[dark] (02) -- (42);
+\draw[dark] (20) -- (24);
+
+% Corner labels
+\node at (00) [below left = 0.1] {$A$};
+\node at (40) [right = 0.1] {$B$};
+\node at (44) [above right = 0.05] {$C$};
+\node at (04) [above left = 0.05] {$D$};
+
+% Midpoint labels
+\node at (20) [below = 0.1] {$P$};
+\node at (42) [right = 0.1] {$Q$};
+\node at (24) [above = 0.1] {$R$};
+\node at (02) [left = 0.1] {$S$};
+\node[dark] at (22) [above right = 0.1] {$M$};

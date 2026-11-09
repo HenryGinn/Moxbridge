@@ -1,0 +1,456 @@
+\question
+\tocsection{The Wonky Chessboard}
+
+Take an arbitrary convex quadrilateral, $ABCD$. Divide each edge into $n$ sections of equal length and connect opposite points to form a grid as shown in figure~\ref{fig:WonkyChessboard_Problem}. Consider regions where there is exactly one region in each row and in each column - we will refer to this as a rook configuration\footnote{These are the arrangements of rooks from chess where no rook could attack any other rook.}. Regions are shaded such that they form a rook configuration. The ultimate aim of this question will be to show that the area of the quadrilateral $ABCD$ is $n$ times larger than the total area of the shaded regions. Whilst you are free (and encouraged) to attempt this question at this stage, the following series of questions guide you through a full proof.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale = 1.8]
+			\input{WonkyChessboard_QuadrilateralCoordinates.tex}
+			
+			\fill[red!20] (13) -- (23) -- (24) -- (14);
+			\fill[red!20] (00) -- (10) -- (11) -- (01);
+			\fill[red!20] (21) -- (31) -- (32) -- (22);
+			\fill[red!20] (32) -- (42) -- (43) -- (33);
+			
+			% Outer lines
+			\draw (00) -- (40) -- (44) -- (04) -- (00);
+			
+			% Internal lines
+			\draw (10) -- (14);
+			\draw (20) -- (24);
+			\draw (30) -- (34);
+			\draw (01) -- (41);
+			\draw (02) -- (42);
+			\draw (03) -- (43);
+			
+			% Corner labels
+			\node at (00) [below left = 0.1] {$A$};
+			\node at (40) [right = 0.1] {$B$};
+			\node at (44) [above right = 0.05] {$C$};
+			\node at (04) [above left = 0.05] {$D$};
+			
+		\end{tikzpicture}
+	\end{center}
+	\caption{The wonky chessboard}
+	\label{fig:WonkyChessboard_Problem}
+\end{figure}
+
+\begin{parts}
+
+\part \label{que:WonkyChessboard_Parallogram} Consider the $n = 2$ case shown in figure~\ref{fig:WonkyChessboard_ParallelogramQuestion}. Here we have defined the midpoints of $AB$, $BC$, $CD$, and $DA$ as $P$, $Q$, $R$, and $S$ respectively. Show that the quadrilateral $PQRS$ is a parallelogram.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=1.3]
+		
+		\input{WonkyChessboard_Parallelogram.tex}
+		
+	\end{tikzpicture}
+	\caption{The parallelogram formed by connecting midpoints}
+	\label{fig:WonkyChessboard_ParallelogramQuestion}
+\end{figure}
+
+\begin{hints}
+	\begin{itemize}
+		\item How can a parallelogram be characterised?
+		\item Doing a lot of algebra will likely be very messy. What tools do you know of for working with geometry problems where there is a lot of flexibility?
+		\item Travelling in a loop around the quadrilateral results leads you back to where you started - can you use this to form an equation?
+	\end{itemize}
+\end{hints}
+
+\needspace{5\baselineskip}
+\begin{solution}
+It is sufficient to prove that $PQ$ is parallel to $SR$ and that $SP$ is parallel to $RQ$. The flexibility of a quadrilateral makes this awkward with algebra which motivates using vectors. Define vectors $\vec a$, $\vec b$, $\vec c$, and $\vec d$ as $AP$, $BQ$, $CR$, and $DS$ respectively, as shown in figure~\ref{fig:WonkyChessboard_ParallelogramSolution}. Note that $2 \cdot (\vec a + \vec b + \vec c + \vec d) = \vec 0$ as this describes a complete path around the quadrilateral, starting and ending in the same location. This is applied in equation~\ref{eqn:WonkyChessboard_Parallel} which shows that $PQ || SR$ and the proof for $SP || RQ$ follows almost identically.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=1.3]
+		
+		\input{WonkyChessboard_Parallelogram.tex}
+		
+		% Vector labels
+		\path[->-=0.5] (00) -- (20) node [midway, below = 0.1] {$\vec a$};
+		\path[->-=0.5] (40) -- (42) node [midway, right = 0.15] {$\vec b$};
+		\path[->-=0.5] (44) -- (24) node [midway, above = 0.1] {$\vec c$};
+		\path[->-=0.5] (04) -- (02) node [midway, left = 0.15] {$\vec d$};
+		
+	\end{tikzpicture}
+	\caption{The parallelogram formed by connecting midpoints.}
+	\label{fig:WonkyChessboard_ParallelogramSolution}
+\end{figure}
+\vspace{-4ex}
+\begin{equation}
+	PQ = \vec a + \vec b = \vec a + \vec b - (\vec a + \vec b + \vec c + \vec d) = -(\vec c + \vec d) = SR
+	\label{eqn:WonkyChessboard_Parallel}
+\end{equation}
+
+\end{solution}
+
+\part \label{que:WonkyChessboard_BaseCase} Hence or otherwise, show that the result is true for the $n = 2$ case as shown in figure~\ref{fig:WonkyChessboard_BaseCase}.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale = 1.3]
+			\input{WonkyChessboard_QuadrilateralCoordinates.tex}
+			
+			\fill[red!20] (00) -- (20) -- (22) -- (02);
+			\fill[red!20] (22) -- (42) -- (44) -- (24);
+			
+			% Outer and internal lines
+			\draw (00) -- (40) -- (44) -- (04) -- (00);
+			\draw (02) -- (42);
+			\draw (20) -- (24);
+			
+			% Corner labels
+			\node at (00) [below left = 0.1] {$A$};
+			\node at (40) [right = 0.1] {$B$};
+			\node at (44) [above right = 0.05] {$C$};
+			\node at (04) [above left = 0.05] {$D$};
+			
+			% Midpoint labels
+			\node at (20) [below = 0.1] {$P$};
+			\node at (42) [right = 0.1] {$Q$};
+			\node at (24) [above = 0.1] {$R$};
+			\node at (02) [left = 0.1] {$S$};
+			
+		\end{tikzpicture}
+	\end{center}
+	\caption{A $2 \times 2$ wonky chessboard}
+	\label{fig:WonkyChessboard_BaseCase}
+\end{figure}
+
+\begin{hints}
+	\begin{itemize}
+		\item Continue with a vector-based approach.
+		\item Split each of the regions into two triangles, one from the parallelogram and one not.
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+It is sufficient to show that the red-shaded region has equal area to the non-shaded region in figure~\ref{fig:WonkyChessboard_BaseCase}. Define the intersection of $PR$ and $SQ$ by $M$. As we know that $PQRS$ is a parallelogram by part~\ref{que:WonkyChessboard_Parallogram}, we can argue by symmetry that the triangles $MQR$ and $MSP$ are congruent, as are $MRS$ and $MPQ$. The problem therefore reduces to showing the combined area of triangles $QCR$ and $APS$ is equal to the combined area of $PBQ$ and $SRD$.
+
+If the triangle $APS$ is translated by $\vec a + \vec b$ (this can be thought of sliding it along an edge of the parallelogram) then $SP$ is mapped onto $RQ$. The new position of the remaining vertex, $A$, is labelled as $A'$ and is shown in figure~\ref{fig:WonkyChessboard_DiagonalsRed}. This forms a quadrilateral, $A'QCR$ with edges defined by $\vec a$, $\vec b$, $\vec c$, and $\vec d$ when going anticlockwise. Similarly triangle $PBQ$ can be translated by $-(\vec c + \vec d)$ (sliding along the other edge of the parallelogram) to form $SB'RD$ as shown in figure~\ref{fig:WonkyChessboard_DiagonalsNonRed}. This quadrilateral can be seen to be identical to $A'QCR$ as their edges are made of the same vectors in the same order\footnote{This last condition on the order is necessary. Can you think of two quadrilaterals where the edges are made of the same four vectors but the shapes are different?}, and therefore they have the same area. As these quadrilaterals are composed of the diagonally opposite triangles of interest we are done.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}{0.49\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1.3]
+				
+				\input{WonkyChessboard_QuadrilateralCoordinates.tex}
+				
+				\coordinate(A2) at ($(00) + (42) - (20)$);
+				\draw (A2) -- (42) -- (44) -- (24) -- (A2);
+				\draw (42) -- (24);
+				
+				% Vertex labels
+				\node at (A2) [below left = 0.05 of A2] {$A'$};
+				\node at (42) [below right = 0.05 of 42] {$Q$};
+				\node at (44) [above right = 0.05 of 44] {$C$};
+				\node at (24) [above left = 0.05 of 24] {$R$};
+				
+				% Vector labels
+				\path[->-=0.5] (A2) -- (42) node [midway, below = 0.1] {$\vec a$};
+				\path[->-=0.5] (42) -- (44) node [midway, right = 0.15] {$\vec b$};
+				\path[->-=0.5] (44) -- (24) node [midway, above = 0.1] {$\vec c$};
+				\path[->-=0.5] (24) -- (A2) node [midway, left = 0.15] {$\vec d$};
+				
+			\end{tikzpicture}
+			\caption{Red corners merged}
+			\label{fig:WonkyChessboard_DiagonalsRed}
+		\end{subfigure}%
+		\hfill
+		\begin{subfigure}{0.49\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1.3]
+				
+				\input{WonkyChessboard_QuadrilateralCoordinates.tex}
+				
+				\coordinate (B2) at ($(40) + (02) - (20)$);
+				\draw (02) -- (B2) -- (24) -- (04) -- (02);
+				\draw (02) -- (24);
+				
+				% Vertex labels
+				\node at (02) [below left = 0.05 of 02] {$S$};
+				\node at (B2) [below right = 0.05 of B2] {$B'$};
+				\node at (24) [above right = 0.05 of 24] {$R$};
+				\node at (04) [above left = 0.05 of 04] {$D$};
+				
+				% Vector labels
+				\path[->-=0.5] (02) -- (B2) node [midway, below = 0.1] {$\vec a$};
+				\path[->-=0.5] (B2) -- (24) node [midway, right = 0.15] {$\vec b$};
+				\path[->-=0.5] (24) -- (04) node [midway, above = 0.1] {$\vec c$};
+				\path[->-=0.5] (04) -- (02) node [midway, left = 0.15] {$\vec d$};
+				
+			\end{tikzpicture}
+			\caption{Non-red corners merged}
+			\label{fig:WonkyChessboard_DiagonalsNonRed}
+		\end{subfigure}
+	\end{center}
+	\caption{Sliding opposite corners along the sides of the parallelogram.}
+	\label{fig:WonkyChessboard_Diagonals}
+\end{figure}
+
+\end{solution}
+
+\part  \label{que:WonkyChessboard_ChessboardTranspositions} Prove that the total area of two regions remains the same when the rows that they occur in are swapped around. That is, prove that $X + Z = W + Y$ in figure~\ref{fig:WonkyChessboard_TranspositionsQuestion}.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale = 2.5]
+			
+			\input{WonkyChessboard_Transpositions}
+			
+			\node[dark] at (barycentric cs:A00=1,A01=1,A10=1,A11=1) {$W$};
+			\node[dark] at (barycentric cs:A01=1,A02=1,A11=1,A12=1) {$Z$};
+			\node[dark] at (barycentric cs:A90=1,A91=1,A100=1,A101=1) {$X$};
+			\node[dark] at (barycentric cs:A91=1,A92=1,A101=1,A102=1) {$Y$};
+			
+		\end{tikzpicture}
+	\end{center}
+	\caption{Swapping two rows where highlighted regions are an arbitrary number of columns apart.}
+	\label{fig:WonkyChessboard_TranspositionsQuestion}
+\end{figure}
+
+\begin{hints}
+	\begin{itemize}
+		\item Use the result for $n = 2$
+		\item The four regions formed by the intersection of two rows with two adjacent columns is an $n = 2$ wonky chessboard.
+		\item Label the regions in a small example of two rows and write out the relationship between the areas for each pair of adjacent columns - how can they be combined in a way that simplifies?
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+We apply the result from part~\ref{que:WonkyChessboard_BaseCase} to each adjacent pair of columns. Define the regions along the first row as $U_1$ to $U_n$ and the regions along the second row as $L_1$ to $L_n$, as shown in figure~\ref{fig:WonkyChessboard_TranspositionsAnswer}. Restated, the problem is to show that the area of the red-shaded area, $L_1 + U_n$, is equal to the blue-shaded area, $L_n + U_1$.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale = 2.5]
+			
+			\input{WonkyChessboard_Transpositions}
+			
+			\node[dark] at (barycentric cs:A00=1,A01=1,A10=1,A11=1) {$L_1$};
+			\node at (barycentric cs:A10=1,A11=1,A20=1,A21=1) {$L_2$};
+			\node at (barycentric cs:A20=1,A21=1,A30=1,A31=1) {$L_3$};
+			\node[dark] at (barycentric cs:A01=1,A02=1,A11=1,A12=1) {$U_1$};
+			\node at (barycentric cs:A11=1,A12=1,A21=1,A22=1) {$U_2$};
+			\node at (barycentric cs:A21=1,A22=1,A31=1,A32=1) {$U_3$};
+			\node at (barycentric cs:A70=1,A71=1,A80=1,A81=1) {$L_{n-2}$};
+			\node at (barycentric cs:A80=1,A81=1,A90=1,A91=1) {$L_{n-1}$};
+			\node[dark] at (barycentric cs:A90=1,A91=1,A100=1,A101=1) {$L_n$};
+			\node at (barycentric cs:A71=1,A72=1,A81=1,A82=1) {$U_{n-2}$};
+			\node at (barycentric cs:A81=1,A82=1,A91=1,A92=1) {$U_{n-1}$};
+			\node[dark] at (barycentric cs:A91=1,A92=1,A101=1,A102=1) {$U_n$};
+			\node at (A51) {$\dots$};
+			
+		\end{tikzpicture}
+	\end{center}
+	\caption{Labelling the regions in figure~\ref{fig:WonkyChessboard_TranspositionsQuestion}}
+	\label{fig:WonkyChessboard_TranspositionsAnswer}
+\end{figure}
+
+Applying the result for $n = 2$ to each $2 \times 2$ subgrid formed by adjacent columns in figure~\ref{fig:WonkyChessboard_TranspositionsAnswer} gives equation~\eqref{WonkyChessboard_SubgridEquivalences}. The equations on the right hand side telescope when added together leaving $U_1 - U_n = L_1 - L_n$. This is equivalent to $U_1 + L_n = U_n + L_1$ which is precisely the comparison of areas desired.
+\begin{equation}
+	\begin{split}
+		U_1 + L_2 &= U_2 + L_1 \\
+		U_2 + L_3 &= U_3 + L_2 \\
+		& \vdotswithin{=}\\
+		U_k + L_{k+1} &= U_{k+1} + L_k \\
+		& \vdotswithin{=} \\
+		U_{n-2} + L_{n-1} &= U_{n-1} + L_{n-2} \\
+		U_{n-1} + L_n &= U_n + L_{n-1}
+	\end{split}
+	\quad \implies \quad
+	\begin{split}
+		U_1 - U_2 &= L_1 - L_2 \\
+		U_2 - U_3 &= L_2 - L_3 \\
+		& \vdotswithin{=} \\
+		U_k - U_{k+1} &= L_k - L_{k+1} \\
+		& \vdotswithin{=} \\
+		U_{n-2} - U_{n-1} &= L_{n-2} - L_{n-1} \\
+		U_{n-1} - U_n &=  L_{n-1} - L_n
+	\end{split}
+	\label{WonkyChessboard_SubgridEquivalences}
+\end{equation}
+
+\end{solution}
+
+\needspace{10\baselineskip}
+\part \label{que:WonkyChessboard_GeneralChessboard} Deduce from parts~\ref{que:WonkyChessboard_BaseCase} and~\ref{que:WonkyChessboard_ChessboardTranspositions} that the result is true for all $n \ge 1$.
+
+\begin{hints}
+	\begin{itemize}
+		\item Any rook configuration can be reached from any other rook configuration by a series of swaps of adjacent rows.
+		\item Show that part~\ref{que:WonkyChessboard_ChessboardTranspositions} implies that all rook configurations of shaded regions have equal area. The result follows immediately from here.
+	\end{itemize}
+\end{hints}
+
+\begin{solution}
+The $n = 1$ case is trivial and the $n = 2$ case has already been proven. The idea for larger $n$ is to show that all rook configurations of shaded regions have the same area and then deduce that this area must be $n$ times smaller than the total quadrilateral area by symmetry.
+
+Motivated by the idea that a rook configuration corresponds to a permutation matrix, we use the fact that all permutations of $n$ elements can be achieved by a series of swaps of adjacent elements, known as transpositions. This means the problem reduces to showing that a pair of rows that the shaded regions are in can be swapped. It is sufficient to show that this swapping property is true for adjacent rows where the columns of the shaded regions are not necessarily adjacent. From this the fact that arbitrary rows can be swapped follows from how an arbitrary finite permutation can be achieved by a sequence of transpositions. This was proven in part~\ref{que:WonkyChessboard_ChessboardTranspositions}.
+
+Now that it has been established that all rook configurations of shaded areas have the same total area then there are two ways of reaching the desired conclusion. For the first method we cover the quadrilateral with an additional $n - 1$ rook configurations such that no two rook configurations share the same regions. As there are $n$ rook configurations of regions which have equal area that cover the whole quadrilateral they must each be $n$ times smaller in area than the whole quadrilateral.
+
+If we are not convinced that the quadrilateral can be decomposed into non-overlapping rook configurations containing the original rook configuration then we can also argue by symmetry. Each rook configuration corresponds to a permutation matrix which in turn corresponds to a permutation of $n$ distinct elements. By symmetry there can be no bias in the number of permutations that move each element to each position. This means that if we ask how many times a given region is shaded as we consider all rook configurations, we will get the same answer independently of what square we choose.
+
+\end{solution}
+
+\part \label{que:WonkyChessboard_ThreeDimensions} Prove that this result is also true in three dimensions.
+
+\begin{hints}
+	\begin{enumerate}
+		\item Think how you can reuse your previous results. You likely only need to find an argument for the base case.
+		\item Consider the fact that the volume of a tetrahedron is a function only of the area of the base and the perpendicular height from the base.
+	\end{enumerate}
+\end{hints}
+
+\begin{solution}
+
+The three-dimensional equivalent of an $n \times n$ wonky chessboard has $n^2$ coloured regions and $n^3$ total regions meaning we are attempting to prove that the total coloured volume is $n$ times smaller than the total volume. We also note that in two dimensions, any four points  define a convex quadrilateral (as long as no three points lie on the same line), but the analogue in three dimensions is more complicated. If the eight vertices of a cube are moved around, the resulting faces are not necessarily planar (that is, they do not like in a plane). For example, (0, 0, 0), (1, 0, ,0), (1, 1, 0), and (0, 1, 1) do not define a planar quadrilateral. It may be tempting to restrict to the case where all faces are planar, but this turns out not to be necessary and the result is still true for a skew hexahedron (the name of a three dimensional quadrilateral with non-planar faces).
+
+We note that the proof of the general case for the two-dimensional wonky chessboard when assuming the $n = 2$ case can be extended to work for any finite number of dimensions. It is therefore sufficient to prove the $n = 2$ case in three dimensions. Before looking at the three-dimensional case, we return to two dimensions and prove the $n = 2$ case in a different way that will extend more easily to higher dimensions.
+
+Figure~\ref{fig:WonkyChessboard_EqualAreaTriangles} shows that the $n = 2$ wonky chessboard decomposed into eight triangles by connecting the four corners to the centre with vertices labelled as in figure~\ref{fig:WonkyChessboard_Parallelogram}. We show that the top two triangles, labelled 1 and 2, have equal area and the result will hold for the other pairs of triangles by symmetry.
+
+If $DR$ and $RC$ form the base of the triangles, then as $RM$ is a shared edge they must have the same altitude. As $DR$ and $RC$ have the same length, the triangles have the same area because the area is proportional to the product of the base and the height. In each pair of triangles, one belongs to a shaded region in FILL ME IN and one belongs to a non-shaded region. This shows that the shaded and non-shaded regions must have the same area.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=1.3]
+		
+		\input{WonkyChessboard_QuadrilateralCoordinates}
+		
+		\filldraw[red!20] (00) -- (22) -- (40) -- cycle;
+		\filldraw[red!20] (04) -- (22) -- (44) -- cycle;
+		\draw (00) -- (04) -- (44) -- (40) -- cycle;
+		\draw[dark] (20) -- (24);
+		\draw (02) -- (42);
+		\draw[dark] (24) -- (22);
+		\draw[dark] (20) -- (22);
+		\draw[dark] (00) -- (22);
+		\draw[dark] (04) -- (22);
+		\draw[dark] (44) -- (22);
+		\draw[dark] (40) -- (22);
+		
+		\node at (barycentric cs:04=1,02=1,22=1) {1};
+		\node[dark] at (barycentric cs:04=1,24=1,22=1) {2};
+		\node[dark] at (barycentric cs:44=1,24=1,22=1) {3};
+		\node at (barycentric cs:44=1,42=1,22=1) {4};
+		\node at (barycentric cs:40=1,42=1,22=1) {5};
+		\node[dark] at (barycentric cs:40=1,20=1,22=1) {6};
+		\node[dark] at (barycentric cs:00=1,20=1,22=1) {7};
+		\node at (barycentric cs:00=1,02=1,22=1) {8};
+		
+		% Corner labels
+		\node at (00) [below left = 0.1] {$A$};
+		\node at (40) [right = 0.1] {$B$};
+		\node at (44) [above right = 0.05] {$C$};
+		\node at (04) [above left = 0.05] {$D$};
+		\node at (20) [below = 0.1] {$P$};
+		
+		% Midpoint labels
+		\node at (42) [right = 0.1] {$Q$};
+		\node at (24) [above = 0.1] {$R$};
+		\node at (02) [left = 0.1] {$S$};
+		\node[dark] at (22) [above left = 0.5 and 0.05] {$M$};
+		
+	\end{tikzpicture}
+	\label{fig:WonkyChessboard_EqualAreaTriangles}
+	\caption{The $n = 2$ wonky chessboard can be decomposed into pairs of triangles of equal area.}
+\end{figure}
+
+We can argue similarly in three dimensions, this time with tetrahedra instead of triangles. Explicitly, we aim to decompose the $2 \times 2 \times 2$ wonky chessboard into pairs of tetrahedra of equal volume, where one of each pair is in a shaded region and the other is not. The volume of a tetrahedron is $\frac{1}{6} \cdot \text{Area of base} \cdot \text{Perpendicular height}$ meaning we expected 24 pairs of tetrahedra in the whole chessboard\footnote{This can be seen by considering a $2 \times 2 \times 2$ cube which can be thought of as a special case of the three-dimensional wonky chessboard that is non-wonky. If we have decomposed the non-wonky chessboard into tetrahedra then we see that moving the vertices around will maintain this decomposition (as long as each of the vertices are vertices of the convex hull of the vertices). For example, if two tetrahedra share a face then they must share the three vertices that define that face. Moving any of these vertices around will move where the face is, but the face must still be shared between the two tetrahedra}.
+
+For each of the six faces and for each of the four edges of those faces, an line can be drawn from the centre of the face to the midpoint of the edge. Pick one face and one edge and call that edge the spine. These are shown as dashed lines in figure~\ref{fig:WonkyChessboard_3D}. The two ends each of the edge that the spine connected to are two corners of the chessboard. The origin, the end-points of the spine, and one of the corners associated with the spine are four points which define a tetrahedron. Choosing the other corner gives the other half of the pair of tetrahedra.
+
+There are only two tetrahedra that can contain a given spine, so the 24 spines give the 24 pairs of tetrahedra that we expected. These tetrahedra are non-overlapping so must compose the chessboard exactly. By construction, both tetrahedra share the face containing the origin and the spine - we consider this to be the base of each of our tetrahedra. As the spine connects to the midpoint of the edge of the chessboard face, the distance along this edge to each of the corners must be the same. The perpendicular height from the base to each of the corners must therefore be the same, and thus the volume of each tetrahedron is the same.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=8]
+		
+		% Corners
+		\coordinate (000) at (0.2, 0, 0);
+		\coordinate (020) at (0, 0.9, 0);
+		\coordinate (200) at (1, 0, 0);
+		\coordinate (220) at (0.8, 0.7, -0.1);
+		\coordinate (002) at (0.2, -0.1, 0.9);
+		\coordinate (022) at (-0.2, 0.7, 1);
+		\coordinate (202) at (1, 0, 0.6);
+		\coordinate (222) at (1, 1, 1);
+		
+		% Centre of edges
+		\coordinate (001) at ($(000)!0.5!(002)$);
+		\coordinate (010) at ($(000)!0.5!(020)$);
+		\coordinate (021) at ($(020)!0.5!(022)$);
+		\coordinate (012) at ($(002)!0.5!(022)$);
+		\coordinate (100) at ($(000)!0.5!(200)$);
+		\coordinate (120) at ($(020)!0.5!(220)$);
+		\coordinate (122) at ($(022)!0.5!(222)$);
+		\coordinate (102) at ($(002)!0.5!(202)$);
+		\coordinate (201) at ($(200)!0.5!(202)$);
+		\coordinate (210) at ($(200)!0.5!(220)$);
+		\coordinate (221) at ($(220)!0.5!(222)$);
+		\coordinate (212) at ($(202)!0.5!(222)$);
+		
+		% Centre of faces
+		\coordinate (110) at ($(010)!0.5!(210)$);
+		\coordinate (101) at ($(100)!0.5!(102)$);
+		\coordinate (011) at ($(001)!0.5!(021)$);
+		\coordinate (112) at ($(012)!0.5!(212)$);
+		\coordinate (121) at ($(120)!0.5!(122)$);
+		\coordinate (211) at ($(201)!0.5!(221)$);
+		
+		% Centre of cube
+		\coordinate (111) at ($(110)!0.5!(112)$);
+		
+		\draw (002) -- (000) -- (200) -- (202);
+		\draw (022) -- (020) -- (220) -- (222) -- cycle;
+		\draw (000) -- (020);
+		\draw (002) -- (022);
+		\draw (202) -- (222);
+		\draw (200) -- (220);
+		\draw[dashed] (100) -- (120);
+		\draw[dashed] (102) -- (122);
+		\draw[dashed] (001) -- (021);
+		\draw[dashed] (201) -- (221);
+		\draw[dashed] (001) -- (201);
+		\draw[dashed] (021) -- (221);
+		\draw[dashed] (010) -- (210);
+		\draw[dashed] (012) -- (212);
+		\draw[dashed] (010) -- (012);
+		\draw[dashed] (210) -- (212);
+		\draw[dashed] (120) -- (122);
+		\draw[dashed] (100) -- (102);
+		\draw[dotted] (011) -- (211);
+		\draw[dotted] (101) -- (121);
+		\draw[dotted] (110) -- (112);
+		
+		\begin{scope}[transparency group]
+			\filldraw[red!40, fill opacity=0.4, draw=myblack] (002) -- (102) -- (101) -- cycle;
+			\filldraw[red!40, fill opacity=0.4, draw=myblack] (002) -- (102) -- (111) -- cycle;
+			\filldraw[red!40, fill opacity=0.4, draw=myblack] (002) -- (101) -- (111) -- cycle;
+			
+			\fill[gray, fill opacity=0.7] (102) -- (101) -- (111);
+			
+			\filldraw[blue!40, fill opacity=0.4, draw=myblack] (202) -- (102) -- (101) -- cycle;
+			\filldraw[blue!40, fill opacity=0.4, draw=myblack] (202) -- (102) -- (111) -- cycle;
+			\filldraw[blue!40, fill opacity=0.4, draw=myblack] (202) -- (101) -- (111) -- cycle;
+		\end{scope}
+		
+		\node at (002) [below left = 0.1] {$A$};
+		\node at (202) [below right = 0.1] {$B$};
+		\node at (102) [below = 0.1] {$M$};
+		\node at (111) [above left = -0.05 and 0.1] {$O$};
+		\node at (101) [below right = 0.05 and -0.1] {$C$};
+		
+	\end{tikzpicture}
+	\label{fig:WonkyChessboard_3D}
+	\caption{The $n=2$ three-dimensional wonky chessboard can be decomposed into 24 pairs of tetrahedra of equal volume.}
+\end{figure}
+
+\end{solution}
+
+\end{parts}

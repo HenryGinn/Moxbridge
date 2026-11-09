@@ -1,0 +1,37 @@
+\def\BoatCentreX{2.5};
+\def\BoatBottom{3};
+\def\BoatSizeX{2};
+\def\BoatSizeY{1.2};
+
+\def\BoatLeft{\BoatCentreX - \BoatSizeX/2};
+\def\BoatRight{\BoatCentreX + \BoatSizeX/2};
+\def\BoatTop{\BoatBottom + \BoatSizeY};
+
+\def\PoolCentreX{4};
+\def\PoolCentreY{2};
+\def\PoolSizeX{7};
+\def\WaterLevel{3.5};
+\def\BallCentreX{5.5};
+\def\ArrowOffsetX{0.5};
+\def\ArrowOffsetY{0.3};
+\def\ArrowLength{0.7};
+\def\BallRadius{0.4}
+\def\Above{0.4};
+\def\Below{0.6}
+
+\def\PoolSizeY{2*\PoolCentreY};
+\coordinate (BoatCentre) at (\BoatCentreX, \BoatBottom);
+\coordinate (PoolTopLeft)     at ({\PoolCentreX - \PoolSizeX/2}, {\PoolCentreY + \PoolSizeY/2});
+\coordinate (PoolBottomLeft)  at ({\PoolCentreX - \PoolSizeX/2}, {\PoolCentreY - \PoolSizeY/2});
+\coordinate (PoolTopRight)    at ({\PoolCentreX + \PoolSizeX/2}, {\PoolCentreY + \PoolSizeY/2});
+\coordinate (PoolBottomRight) at ({\PoolCentreX + \PoolSizeX/2}, {\PoolCentreY - \PoolSizeY/2});
+\coordinate (WaterLevelLeft)  at ($(PoolBottomLeft)  + (0, \WaterLevel)$);
+\coordinate (WaterLevelRight) at ($(PoolBottomRight) + (0, \WaterLevel)$);
+
+\filldraw[blue!20] (WaterLevelLeft) -- (PoolBottomLeft) -- (PoolBottomRight) -- (WaterLevelRight);
+\fill[mywhite] (\BoatLeft, \BoatTop) -- (\BoatLeft, \BoatBottom) -- (\BoatRight, \BoatBottom) -- (\BoatRight, \BoatTop);
+
+\draw (\BoatLeft, \BoatTop) -- (\BoatLeft, \WaterLevel);
+\draw (\BoatRight, \WaterLevel) -- (\BoatRight, \BoatTop);
+\draw (PoolTopLeft) -- (WaterLevelLeft);
+\draw (WaterLevelRight) -- (PoolTopRight);

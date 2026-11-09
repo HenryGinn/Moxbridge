@@ -1,0 +1,119 @@
+\tocsection{Leaky Jug}
+\question
+
+There is a 1~L jug filled 90\% of water by volume with the remaining 10\% filled with alcohol. There is a hole at the bottom of the jug which causes 100~ml/s of the liquid to come out. Water enters the jug at 100~ml/s.
+
+\begin{parts}
+
+\part Assuming perfect mixing of water and alcohol, come up with an equation for the concentration of alcohol in the jug over time and solve it.
+
+\begin{hints}
+
+\begin{enumerate}
+	\item Make an equation for the volume of alcohol in the jug.
+	\item The volume of fluid in the jug is constant.
+	\item Find an equation for the alcohol leaving the jug.
+	\item If you have not covered first order constant coefficient ordinary differential equations, note that $\frac{\mathrm{d}}{\mathrm{d}x} e^{mx} = me^{mx}$.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+As the volume entering the jug is equal to the volume leaving, the total volume remains constant. We define the volume of alcohol in litres of alcohol per litre of fluid in the jug to be $x$. If the fluid leaves at $r$~l/s then $rx$ of this is alcohol. The amount of alcohol entering the jug is 0~l/s so the overall rate of change of alcohol in the jug by volume is $\frac{\mathrm{d}x}{\mathrm{d}t} = -rx$. Solving this we get $x = r_0 e^{-rt}$ where $r_0$ is the initial volume of alcohol in the jug initially. Substituting $r = 0.1 = r_0$ applies our boundary conditions and the volume of alcohol is given as $0.1e^{-0.1t}$.
+
+\end{solution}
+
+\part Discuss the validity of the assumption that the alcohol mixes perfectly with the water.
+
+\begin{hints}
+
+\begin{enumerate}
+	\item Will the true concentration be higher or lower than the model predicts?
+	\item Consider the case with no mixing.
+	\item Draw a graph to compare the two.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+A proper assessment of mixing would need to account for the geometry of the jug, the nature of the flow of water entering the jug, and the turbulence of the fluids inside the jug. It is often not possible to explore all assumptions in this level of detail so we need to apply judgement in our modelling. Given that the entire volume of fluid that the jug holds is replaced every ten seconds, we can assume that the water is reasonably turbulent and therefore should have a good level of mixing. If the mixing was poorer than expected then the concentration of alcohol would likely be higher at the bottom of the jug, therefore out prediction would be an overestimate.
+
+We explore this by considering the other extreme case where this is no mixing at all as the true answer will likely lie in between these cases. To determine the concentration of alcohol in the jug without mixing we can think of a second jug without any water entering it. The concentration of alcohol in this jug will remain constant, so $\frac{\mathrm{d}x}{\mathrm{d}t} = -rx_0$ where $x_0$ is the number of litres of alcohol originally (and therefore equal to the concentration). When this second jug empties the rate of alcohol leaving will be 0. Integrating gives equation~\eqref{eqn:LeakyJug_NoMixing}, and as before the concentration is equal to the number of litres of alcohol because the total volume is a constant 1~L.
+\begin{equation}
+	\frac{\mathrm{d}x}{\mathrm{d}t} =
+	\begin{cases}
+		\begin{alignedat}{2}
+			-rx_0 &\quad \text{if } 0 \leq & t & < \frac{1}{r} \\
+			0\phantom{x} &\quad \text{if } \frac{1}{r} \leq & t &
+		\end{alignedat}
+	\end{cases} \implies \quad x = \begin{cases}
+	\begin{alignedat}{2}
+		x_0(1 - rt) &\quad \text{if } 0 \leq & t & < \frac{1}{r} \\
+		0\phantom{-rt}     &\quad \text{if } \frac{1}{r} \leq & t &
+	\end{alignedat}
+	\end{cases}
+	\label{eqn:LeakyJug_NoMixing}
+\end{equation}
+
+This is plotted in figure~\ref{fig:LeakyJug_Comparison}. We see that the gradients match at $t = 0$ and the two solutions are close for small values of $t$, implying that our assumption is good in this region. For larger values of $t$ the solutions stray apart, reaching a maximum difference at $t = \frac{1}{r}$. The no-mixing solution is expected to be a poor representation of reality in this region which is also indicated by the unphysical discontinuous first derivative so this difference is perhaps expected. As $t \to \infty$ the solutions converge but this method is too crude to say anything more about the accuracy of this convergence rate.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=0.9\textwidth,
+			height=0.6\textwidth,
+			title=\large{Modelled Concentration of Alcohol},
+			xlabel=Time (s),
+			ylabel=Concentration (L/L),
+			xmin = 0,
+			xmax=30,
+			ymin=-0.01,
+			ymax=0.11,
+			grid=major,
+			xtick distance=5,
+			y tick label style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=2
+			},
+			legend pos=north east,
+			legend style={
+				draw=myblack,
+				fill=mywhite,
+				text=myblack,
+				font=\small,
+				fill opacity=0.8,
+				draw opacity=1
+			},
+			],
+			\addplot[
+				cyan,
+				thick,
+				domain=0:30,
+				samples=100
+			]
+			{0.1 * exp(-0.1*x)};
+			\addlegendentry{Perfect mixing};
+			\addplot[
+				purple,
+				thick
+				]
+				coordinates {
+					(0, 0.1)
+					(10, 0)
+					(30, 0)
+				};
+			\addlegendentry{No mixing};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Comparing the case of perfect mixing with no mixing.}
+	\label{fig:LeakyJug_Comparison}
+\end{figure}
+
+We conclude that our initial assumption is likely quite good, although perhaps the decay constant may be slightly higher than our model predicts. This last note would be especially important to consider for tall and thin jugs.
+
+\end{solution}
+
+\end{parts}

@@ -1,0 +1,56 @@
+\tocsection{Iteratively Merging a Set}
+\question
+
+\begin{parts}
+
+\part \label{que:IterativelyMergingASet_SpecialCase} Start with the numbers 1, 2, 3, 4, 5, 6, 7. Remove any two numbers, $a$ and $b$, from the list and replace them with $ab + a + b$. Repeat this until only a single number remains. What is the final number?
+
+\begin{hints}
+
+\begin{enumerate}
+	\item Attempting this naively by hand will be computationally hard - do not reach for your calculator, change your approach.
+	\item Do the process algebraically for $a$, $b$, and $c$ - what do you notice?.
+	\item Expand $(x - a)(x - b)(x - c)$
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+When doing this with a list of three numbers, $a$, $b$, and $c$, we get $abc + ab + bc + ca + a + b + c$. This looks very similar to the coefficients in an expansion of the product of linear terms and we see this to be the case in equation~\eqref{eqn:IterativelyMergingASet_FormulaMotivation}. This process can be seen as equivalent to expanding these brackets, where choosing two numbers to replace is the same as choosing the corresponding pair of brackets. The answer follows from commutativity and associativity of real numbers. The final answer is $8! - 1$.
+\begin{equation}
+	abc + ab + bc + ca + a + b + c = (1 + a)(1 + b)(1 + c) - 1
+	\label{eqn:IterativelyMergingASet_FormulaMotivation}
+\end{equation}
+
+\end{solution}
+
+\part Prove the formula you arrived at in the part~\ref{que:IterativelyMergingASet_SpecialCase} for any starting numbers and show that the result is independent of the choices made. What if we replaced a pair of numbers, $a$ and $b$, with $\lambda ab + \mu (a + b)$ where $\lambda \ge 0$?
+
+\begin{hints}
+
+\begin{enumerate}
+	\item The formula is $-1 + \prod_{i=1}^n (1 + a_i)$ where $a_i$ are the starting numbers.
+	\item Use induction on the length of the initial sequence.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+This step is essentially just formalising the ideas used in the first part. We can define $A_n$ to be a tuple of numbers with $|A_n| = n$. We denote the function that maps $A_n$ to the result of the merging process as $f$ and do induction on $n$ to prove that $f(A_n) = -1 + \prod_{i=1}^n (1 + a_i)$ where $A_n = (a_1, \dots, a_n)$. The base case where $n = 1$ is trivial as $f(A_1) = (1 + a_1) - 1 = a_1$. The induction step follows the same reasoning from before and is given in equation~\eqref{eqn:IterativelyMergingASet_InductionStep}.
+\begin{equation}
+	\begin{aligned}
+		f(A_n) &= f(A_{n-1}) \cdot a_n + f(A_{n-1}) + a_n  \\
+		&= -1 + (f(A_{n-1}) + 1)(a_n + 1)  \\
+		&= -1 + \left( \prod_{i=1}^{n-1} (1 + a_i) \right)(a_n + 1)  \\
+		&= -1 + \prod_{i=1}^{n} (1 + a_i)
+	\end{aligned}
+	\label{eqn:IterativelyMergingASet_InductionStep}
+\end{equation}
+
+For the last part we note that $(\alpha a + \beta)(\alpha b + \beta) = \alpha^2ab + \alpha\beta(a + b) + \beta^2$. Defining $\alpha = \sqrt{\lambda}$ and $\beta = \mu$ matches the coefficients in the replacement formula, therefore applying the above argument shows that the generalised formula is $-(\mu^n) + \prod_{i=1}^n (\sqrt{\lambda}a_i + \beta)$.
+
+\end{solution}
+
+\end{parts}

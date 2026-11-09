@@ -1,0 +1,32 @@
+\question
+\tocsection{Comparing and Estimating Numbers}
+
+\begin{parts}
+
+\part Which is bigger: $\sqrt{2}$ or $\sqrt[3]{3}$?
+
+\begin{solution}
+
+The radicals can be eliminated by raising both sides to the power of 6. Which number is bigger is preserved by this because both are positive and $f(x) = x^6$ is an increasing function. The comparison turns into which is bigger of $2^3 = 8$ and $3^2 = 9$, we therefore conclude that $\sqrt[3]{3} > \sqrt{2}$.
+
+\end{solution}
+
+\part Estimate $\sqrt{14}^8$
+
+\begin{solution}
+
+Trying to simplify $\sqrt{14}$ by approximating it as $\sqrt{16}$ gives a very crude approximation. Equation~\eqref{eqn:ComparingAndEstimatingNumbers} gives two more precise ways to proceed.
+\begin{subequations}
+	\begin{equation}
+		\sqrt{14}^8 = 14^4 = 196^2 \approx 200^2 = 40000
+	\end{equation}
+	\begin{equation}
+		\sqrt{14}^8 = 14^4 = 2^4 \cdot 7^4 = 16 \cdot 49 \cdot 49 \approx 16 \cdot 50 \cdot 50 = 40000
+	\end{equation}
+	\label{eqn:ComparingAndEstimatingNumbers}
+\end{subequations}
+If we know that $49^2 = 2400$ then we can get a slightly more complicated multiplication, but gives a very good approximation of $16 \cdot 2400 = 38400$. This is essentially as much work as computing the exact answer which is 38416.
+
+\end{solution}
+
+\end{parts}

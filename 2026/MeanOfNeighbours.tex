@@ -1,0 +1,31 @@
+\tocsection{Mean of Neighbours}
+\question
+
+There is an infinite grid of non-negative integers where each number is equal to the mean of its four directly adjacent neighbours. Characterise all such solutions with proof.
+
+\begin{hints}
+
+\begin{enumerate}
+	\item The only solutions are the constant solutions, that is, every number is the same.
+	\item In one dimension the mean of neighbours property forces all numbers to be in an arithmetic sequence.
+	\item Prove that the only solutions are constant by contradiction - assume that a non-constant solution exists and show that this breaks the rules of the grid.
+	\item If non-negative integers were allowed, there would exist non-constant solutions. From this you know that the non-negativity must be an important part of your proof.
+\end{enumerate}
+
+\end{hints}
+
+\begin{solution}
+
+We note that adding a constant to the whole grid will not change whether something is a solution. If we were to find a non-constant solution where the minimum was -10 for example, we could add 10 to all numbers in the grid and we would have a non-negative constant solution. The non-negativity is simply providing a lower bound, but the fact that this lower bound is at 0 is arbitrary.
+
+Playing around with random numbers and trying to build the grid, we note that when one neighbour is bigger, it seems that we need another to be smaller to compensate for it. This makes us think that in a non-constant solution there may be some strictly decreasing sequence of numbers which would break our lower bound and give us a contradiction.
+
+If the solution is non-constant and bounded from below then there exists some minimum number, $m$, with neighbours $a$, $b$, $c$, and $d$ where one of them is different to $m$. Without loss of generality we choose $a \ne m$, and by minimality of $m$ we have $a > m$. Equation \eqref{eqn:MeanOfNeighbours} gives us our contradiction using the mean-property. Explicitly, $m$ cannot be the minimum of the whole grid because one of its neighbours would have to be even smaller than $m$.
+\begin{equation}
+	0 = a + b + c + d - 4m \geq a + m + m + m - 4m	= a - m > 0
+	\label{eqn:MeanOfNeighbours}
+\end{equation}
+
+For interest only we note that this result is also true for non-negative real numbers, but the above proof does not work. By the well-ordering property we can deduce the existence of a minimum over the grid of integers, but there is not necessarily a minimum over a grid of real numbers. For example, the sequence $a_n = \frac{1}{n}$ for $n \in \mathbb{N} \setminus \{0\}$ is not bounded below by any number greater than 0. The minimum must be attained, and $\frac{1}{n} \ne 0$ for all $n$ so the sequence has no minimum\footnote{The greatest upper bound and the smallest lower bound are called the infinum and the supremum respectively, and these always exist for a set of real numbers.}.
+
+\end{solution}
