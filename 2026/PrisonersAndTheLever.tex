@@ -113,4 +113,24 @@ If the prisoner order was random however, then there is a non-zero chance, $p$, 
 
 \end{solution}
 
+\ifprintanswers
+
+\part (Bonus): If we are allowed to add as many levers as we want (all starting in some unknown state), is it possible for the announcer to also give the order in which the prisoners first entered the room? Either prove it is not possible or give a strategy.
+
+\begin{solution}
+
+The complication here is that if we come up with some sort of signal to encode in the levers then it is possible that the first person to enter the room could see that signal and incorrectly make an announcement. We copy the strategy from before to have someone count the number of prisoners who have been in the room so that they are sure that everyone has had an opportunity to flip the levers. We dedicate one lever for this role.
+
+Before giving a working strategy, we look at a simpler strategy that does not work. We can have a group of levers that can encode a number from 1 to $n + 1$. Each prisoner can have their own group of levers that only they modify, and then a communal set of levers that all prisoners can modify. The first time a prisoner enters the room, they copy the state of the communal levers to their own levers, and then encode some unique identification number into the communal levers that could have been determined beforehand. When the communicator has determined that everyone has been in the room, they try to deduce the order from the individual levers.
+
+We give an example of this strategy working and then highlight where it fails, and this will indicate how to fix the strategy. We use a unary counter - $n + 1$ levers, where prisoner $i$ is encoded by having all levers in the up position apart lever $i$ which is down. Suppose the communicator then sees the following numbers encoded once they know all prisoners have been in the room: 3, 5, 2, un-decodable mess, 4. This corresponds to the order 4, 5, 2, 3, 1. This worked because we got lucky and the communal levers did not start in a configuration that was a valid encoding of one of the prisoners. If it did then we would not be able to deduce the first prisoner and we would only be able to determine the order up to a cycle.
+
+We can remove the susceptibility to cycles with another counter. Suppose there are some levers that can count up to some number more than $n + 1$. When a person enters the room for the first time, they increment the counter by 1. When the communicator deduces that everyone has been in the room, they look at the final state of the counter. This almost certainly will not show the number of prisoners as it would have started representing some random number, but the communicator can determine what the state of the counter was when each prisoner entered the room.
+
+Suppose we use a binary counter with $L = \lfloor \log{n + 1} / \log{2} \rfloor + 1$ levers which can have $2^L$ states. We then have $2^L$ binary counters which can all count up to $\lceil \log{n + 1} / log{2}\rceil$ states. When a prisoner enters the room for the first time, they read the number on the counter, go to the counter associated with that number, and encode their own predetermined unique identity number (which will be between 0 and $n$ inclusive so that it is representable by the counter). When the communicator makes an announcement, they determine the state of the counter when the first prisoner entered the room. The communicator has therefore identified a contiguous block of $n + 1$ counters starting from this point (potentially wrapping around from $2^L$ back to 0) where the states of the prisoners are encoded in the order they entered the room.
+
+\end{solution}
+
+\fi
+
 \end{parts}

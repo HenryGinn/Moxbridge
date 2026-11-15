@@ -127,9 +127,12 @@
 
 \makeatother
 
-% Make footnotes work in dynamically shown environements.
-\makesavenoteenv{hints}
-\makesavenoteenv{solution}
+\AtBeginDocument{
+	\ifprintanswers
+	\makesavenoteenv{hints}
+	\makesavenoteenv{solution}
+	\fi
+}
 
 % Define arrow on part of the line
 % For example \path[->-=0.5] (A) -- (B)

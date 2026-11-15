@@ -31,7 +31,7 @@ Building on the hints, we only need to determine $\lambda$ to completely determi
 \label{sol:InterpolatingPolynomials_Intermediate}
 We follow the same procedure from \ref{sol:InterpolatingPolynomials_Beginner}, but with more generality. The corresponding $h(x)$ can be written down immediately as in equation~\ref{eqn:InterpolatingPolynomials_Intermediate} and the final answer is given as $f(x) = h(x) + x^2$.
 \begin{equation}
-	h(x) = \alpha \cdot \frac{\prod_{k=1}^n (x-k)}{\prod_{k=1}^n (n-k)}
+	h(x) = (\alpha - n^2) \cdot \frac{\prod_{k=0}^{n-1} (x-k)}{\prod_{k=0}^{n-1} (n-k)}
 	\label{eqn:InterpolatingPolynomials_Intermediate}
 \end{equation}
 
@@ -43,7 +43,7 @@ We follow the same procedure from \ref{sol:InterpolatingPolynomials_Beginner}, b
 	\begin{enumerate}
 		\item Use linearity - the finite sum of a collection of polynomials is also a polynomial.
 		\item Find a way to focus on one point at a time.
-		\item Use the factor theorem - a polyomial has a root at $x_0$ if and only if the polynomial is a multiple of $x - x_0$.
+		\item Use the factor theorem - a polynomial has a root at $x_0$ if and only if the polynomial is a multiple of $x - x_0$.
 	\end{enumerate}
 \end{hints}
 
