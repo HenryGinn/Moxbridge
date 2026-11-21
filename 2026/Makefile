@@ -1,19 +1,16 @@
-all: Solutions SolutionsDark PreviouslySeen PreviouslySeenDark
+SOURCES = MoxbridgePreviouslySeenQuestions-Light.tex MoxbridgePreviouslySeenQuestions-Dark.tex MoxbridgeQuestionsAndSolutions-Light.tex MoxbridgeQuestionsAndSolutions-Dark.tex
+PDFS = $(SOURCES:.tex=.pdf)
 
-Solutions:
-	latexmk -f -pdf -jobname=MoxbridgeQuestionsAndSolutions-light \
-	MoxbridgeQuestionsAndSolutions.tex
+.PHONY: all
 
-SolutionsDark:
-	latexmk -f -pdf -jobname=MoxbridgeQuestionsAndSolutions-dark \
-	-pdflatex="pdflatex %O \"\def\DarkMode{}\input{%S}\"" \
-	MoxbridgeQuestionsAndSolutions.tex
+all: $(PDFS)
 
-PreviouslySeen:
-	latexmk -f -pdf -jobname=MoxbridgePreviouslySeenQuestions-light \
-	MoxbridgePreviouslySeenQuestions.tex
+%.pdf: %.tex
+	latexmk $<
 
-PreviouslySeenDark:
-	latexmk -f -pdf -jobname=MoxbridgePreviouslySeenQuestions-dark \
-	-pdflatex="pdflatex %O \"\def\DarkMode{}\input{%S}\"" \
-	MoxbridgePreviouslySeenQuestions.tex
+clean:
+	latexmk -C
+
+distclean: clean
+	rm -f $(PDFS)
+

@@ -29,9 +29,14 @@
 \coordinate (WaterLevelRight) at ($(PoolBottomRight) + (0, \WaterLevel)$);
 
 \filldraw[blue!20] (WaterLevelLeft) -- (PoolBottomLeft) -- (PoolBottomRight) -- (WaterLevelRight);
-\fill[mywhite] (\BoatLeft, \BoatTop) -- (\BoatLeft, \BoatBottom) -- (\BoatRight, \BoatBottom) -- (\BoatRight, \BoatTop);
+\fill[background] (\BoatLeft, \BoatTop) -- (\BoatLeft, \BoatBottom) -- (\BoatRight, \BoatBottom) -- (\BoatRight, \BoatTop);
 
-\draw (\BoatLeft, \BoatTop) -- (\BoatLeft, \WaterLevel);
-\draw (\BoatRight, \WaterLevel) -- (\BoatRight, \BoatTop);
-\draw (PoolTopLeft) -- (WaterLevelLeft);
-\draw (WaterLevelRight) -- (PoolTopRight);
+\ifdarkmode
+	\draw (\BoatLeft, \BoatTop) -- (\BoatLeft, \WaterLevel);
+	\draw (\BoatRight, \WaterLevel) -- (\BoatRight, \BoatTop);
+	\draw (PoolTopLeft) -- (WaterLevelLeft);
+	\draw (WaterLevelRight) -- (PoolTopRight);
+\else
+	\draw (\BoatLeft, \BoatTop) -- (\BoatLeft, \BoatBottom) -- (\BoatRight, \BoatBottom) -- (\BoatRight, \BoatTop);
+	\draw (PoolTopLeft) -- (PoolBottomLeft) -- (PoolBottomRight) -- (PoolTopRight);
+\fi
