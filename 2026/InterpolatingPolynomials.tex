@@ -4,7 +4,7 @@
 Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued function $f$, there exists a polynomial, $p$, of degree at most $n$ that interpolates $f$ at these points. That is $y_i = f(x_i) = p(x_i)$ for all $x_i$, $i = 0, 1, \dots, n-1, n$. This polynomial is unique and is known as the Lagrange Interpolating Polynomial, or simply the Lagrange Polynomial.
 
 \begin{parts}
-
+	
 	\part \label{que:InterpolatingPolynomials_Beginner} If $f$ is a quartic polynomial satisfying $f(1) = 1$, $f(2) = 4$, $f(3) = 9$, $f(4) = 16$, and $f(5) = 35$, determine $f(6)$. Note that $f(5) \ne 5^2$.
 	
 	\begin{hints}
@@ -23,7 +23,7 @@ Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued f
 			h(x) = \mu \frac{(x-1)(x-2)(x-3)(x-4)}{(5-1)(5-2)(5-3)(5-4)}
 			\label{eqn:InterpolatingPolynomials_Beginner}
 		\end{equation}
-	
+		
 	\end{solution}
 	
 	\part \label{que:InterpolatingPolynomials_Intermediate} $f$ is a degree $n$ polynomial satisfying $f(k) = k^2$ for $k = 0, \dots, n-1$ and $f(n) = \alpha$. By using the ideas used in part~\ref{que:InterpolatingPolynomials_Beginner} or otherwise, determine $f(x)$. You do not need to give your answer in the form $a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0$.
@@ -50,8 +50,8 @@ Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued f
 	\end{hints}
 	
 	\begin{solution}
-	\label{sol:InterpolatingPolynomials_Existence}
-	
+		\label{sol:InterpolatingPolynomials_Existence}
+		
 		The key to this problem is to use the fact that polynomials can be added to get another polynomial. This allows us to isolate each point in the following way. For each point, $(x_i, y_i)$, we can find a polynomial, $p_i(x)$, that is $0$ when evaluated on all $x_j$ where $j \ne i$ and satisfies $p(x_i) = y_i$. The sum of these polynomials gives us an interpolating polynomial by equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialInterpolates} ($\delta_{ij} = 0$ if and only if $i = j$).
 		\begin{equation}
 			p(x_i) = \sum_j^n p_j(x_i) = \sum_j^n y_i \delta_{ij} = y_i
@@ -75,7 +75,7 @@ Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued f
 		\end{subequations}
 		
 	\end{solution}
-
+	
 	\part \label{que:InterpolatingPolynomials_Uniqueness} Show that there is only one interpolating polynomial of minimal order. That is, if for all $x_i$, $i = 0, 1, \dots n-1, n$ we have $p(x_i) = f(x_i) = q(x_i)$ then $p(x) = q(x)$ for all $x \in \mathbb{R}$. Deduce that all polynomials of degree $n$ or less that interpolate $n + 1$ points must be of minimum order.
 	
 	\begin{hints}
@@ -86,13 +86,14 @@ Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued f
 	\end{hints}
 	
 	\begin{solution}
-	
+		
 		As both $p$ and $q$ are interpolating polynomials, $p(x_i) - q(x_i) = 0$ for all $x_i$. As $p(x) - q(x)$ is of degree $n$ and has roots at $n + 1$ points, it must be identically 0. This can be seen by the factor theorem as $p(x) - q(x) = \prod_{i=0}^n \lambda (x - x_i)$ for some $\lambda \in \mathbb{R}$, yet for $\lambda \ne 0$ the right hand side has degree $n + 1$. We conclude that $\lambda = 0$ and that $p(x) = q(x)$.
 		
 		If there is some polynomial, $p$, that interpolates $f$ at $n + 1$ points then it necessarily agrees with the interpolating polynomial of minimal degree at these points. By the previous argument we must have that $p$ is identically equal to the polynomial of minimal degree.
-	
+		
 	\end{solution}
-
+	
+	\needspace{5\baselineskip}
 	\part (Bonus) Now restrict to points with integer coordinates and polynomials with integer coefficients. Give an example where there is no such interpolating polynomial. Classify exactly when such an interpolating polynomial exists for the case where the the $x_i$ are consecutive integers.
 	
 	\begin{solution}
@@ -101,12 +102,26 @@ Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued f
 		
 		In that example the problem came from the fact that the difference in the second coordinate did not divide the difference in the first coordinate. Motivated to think about differences, we consider $(a + 1)^k - a^k$. In equation~\eqref{eqn:InterpolatingPolynomials_DifferenceInPowers} we see that the degree $k$ terms cancel out and we have $ka^{k - 1}$ with some lower order terms. In particular, the result is of lower order.
 		\begin{equation}
-			(a + 1)^k - a^k = \left( \sum_{i=0}^k {k \choose i} a^i \right) - a^k = k a^{k - 1} + \sum_{i=0}^{k - 2} {k \choose i} a^i
+			(a + 1)^k - a^k = \left( \sum_{i=0}^k \binom{k}{i} a^i \right) - a^k = k a^{k - 1} + \sum_{i=0}^{k - 2} \binom{k}{i} a^i
 			\label{eqn:InterpolatingPolynomials_DifferenceInPowers}
 		\end{equation}
 		
-		We now introduce the idea of differencing a sequence. We take a sequence of length $m$ and find the difference between successive terms to make a new sequence of length $m - 1$. Call this sequence the first order differences. In particular we note that if the original sequence could be interpolated by a degree $k$ polynomial then the sequence of first order differences can be interpolated by a degree $k - 1$ polynomial. 
+		We now introduce the idea of differencing a sequence. We take a sequence of length $m$ and find the difference between successive terms to make a new sequence of length $m - 1$. Call this sequence the first order differences. In particular we note that if the original sequence could be interpolated by a degree $k$ polynomial if and only if the sequence of first order differences can be interpolated by a degree $k - 1$ polynomial.
+		
+		If we difference the first order differences then we get the sequence of second order differences and this process can repeat to get the sequence of $d$th order differences. For a sequence $(a_n)_{n \in \mathbb{N}}$ we denote the sequence of $d$th order differences as $\Delta_d (a_n)_{n \in \mathbb{N}}$. From equation~\eqref{eqn:InterpolatingPolynomials_DifferenceInPowers} we can see by induction that $\Delta_n (i^n)_{i \in \mathbb{N}}$ will be the constant sequence $n!$ as all lower order terms would have annihilated.
+		
+		To see how this relates to the integrality of the coefficients, consider the sequence $(a_n i^n)_{i \in \mathbb{N}}$. By linearity the $n$th order differences will be $a_n n!$, meaning that if $a_n$ is an integer then $n!$ will divide the $n$th order differences. The contrapositive of this statement is that if $n!$ does not divide the $n$th order differences then $a_n$ was not an integer. This is a weaker version of what we wanted to prove - it is the case when the interpolating polynomial is a single term of degree $n$.
+		
+		We now try and extend this to a general polynomial of degree $n$. If we have $p(x) = \sum_{k=0}^n a_k x^k$ then we have a sequence $(p(i))_{i \in \mathbb{N}}$. As the differencing operation is linear, equation~\eqref{eqn:InterpolatingPolynomials_LinearityOfDifferences} shows that we can consider the differences of each power separately and then take a linear combination. Our aim will be to show that $k!$ divides the $k$th order differences if and only if $a_i \in \mathbb{Z}$ for $i \ge k$.
+		\begin{equation}
+			\Delta_d (p(i))_{i \in \mathbb{N}} = \Delta_d \left( \sum_{k=0}^n a_k i^k \right)_{i \in \mathbb{N}} = \sum_{k=0}^n a_k\Delta_d (i^k)_{i \in \mathbb{N}}
+			\label{eqn:InterpolatingPolynomials_LinearityOfDifferences}
+		\end{equation}
+		
+		Looking back at equation~\ref{eqn:InterpolatingPolynomials_DifferenceInPowers}, we see that all coefficients in $\Delta (x^k)$ have a factor of $k$, other than the constant term which is annihilated upon taking a second difference. Going further, if we take the difference a total of $d$ times then all coefficients are a multiple of $d$ consecutive integers\footnote{If $d=1$ then this statement is also true meaning we do not need to worry about the presence of the constant term in the first difference.}, therefore each coefficient must include a factor of $d$ by the pigeonhole principle. If this sequence is differenced again, the coefficients will either annihilate or gain another consecutive factor. Either way, all coefficients will still divide $d$.
+		
+		We can think of the zero order differences as the original sequence which clearly needs to be integral if we are to interpolate it with a polynomial with integer coefficients. If this is our base case, then the above argument is our induction step in showing that the $d$th differences of $(i^k)_{i \in \mathbb{N}}$ must have a factor of $d!$ By equation~\eqref{eqn:InterpolatingPolynomials_LinearityOfDifferences}, we have in fact proved the forward direction of our characterisation: if the interpolating polynomial has integer coefficients then $d!$ divides the sequence of order $d$ differences.
 		
 	\end{solution}
-
+	
 \end{parts}

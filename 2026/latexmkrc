@@ -1,0 +1,25 @@
+# latexmkrc
+
+add_cus_dep( 'tex', 'dark.pdf', 0, 'make_dark_pdf' );
+
+sub make_dark_pdf {
+    my ($base) = @_;
+
+    system(
+        "latexmk",
+        "-pdf",
+        "-jobname=$base-dark",
+        "-pdflatex=pdflatex %O '\\def\\DarkMode{}\\input{%S}'",
+        "$base.tex"
+    );
+
+    return 0;
+}
+
+# Convenience targets
+
+push @default_files,
+    'MoxbridgeQuestionsAndSolutions.pdf',
+    'MoxbridgeQuestionsAndSolutions-dark.pdf',
+    'MoxbridgePreviouslySeenQuestions.pdf',
+    'MoxbridgePreviouslySeenQuestions-dark.pdf';

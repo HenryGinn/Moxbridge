@@ -96,6 +96,17 @@
 	}
 }
 
+% Making it possible to detect dark mode by whether DarkMode is defined 
+\newif\ifdarkmode
+\darkmodefalse
+\ifdefined\DarkMode
+	\darkmodetrue
+\fi
+
+\ifdarkmode
+	\StyleDark
+\fi
+
 % Make hints environment.
 \makeatletter
 
