@@ -1,28 +1,48 @@
 \documentclass[hidelinks, 11 pt]{exam}
 
-\usepackage[a4paper, top=25.4mm, bottom=25.4mm, left=19.1mm, right=19.1mm, footskip=8mm]{geometry}
+
+% ##### IMPORTS #####
+
+% Page setup
+\usepackage[
+	a4paper,
+	top=20mm,
+	bottom=20mm,
+	left=20mm,
+	right=20mm,
+	footskip=8mm
+	]{geometry}
 \usepackage{parskip}
-\usepackage[list=true, listformat=simple]{subcaption}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{amsthm}
-\usepackage{mathtools}
+\usepackage{needspace}
+
+% General
 \usepackage{amsfonts}
+\usepackage{environ}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+
+% Maths
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{mathtools}
+
+% Referencing
+\usepackage{caption}
+\usepackage[list=true, listformat=simple]{subcaption}
+\usepackage{hyperref}
+\usepackage{footnote}
+\usepackage{titlesec}
+
+% Figures and tables
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+% Tikz
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{tkz-euclide}
-\usepackage{multirow}
-\usepackage{hyperref}
-\usepackage{titlesec}
-\usepackage{array}
-\usepackage{booktabs}
-\usepackage{enumitem}
-\usepackage{environ}
-\usepackage{etoolbox}
-\usepackage{needspace}
-\usepackage{footnote}
-
 \usetikzlibrary{
 	quotes,
 	angles,
@@ -30,22 +50,19 @@
 	math,
 	calc,
 	decorations.markings,
-	arrows.meta}
+	arrows.meta,
+	external}
+\tikzexternalize[prefix=Figures/]
 
-\widowpenalty=10000
-\clubpenalty=10000
 
-\newcommand{\tocsection}[1]{%
-	\refstepcounter{section}%
-	\addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
-}
+% ##### SPACING #####
 
 % Redefining space around figures and tables
 \AtBeginEnvironment{figure}{\vspace{-1mm}}
 \AtEndEnvironment{table}{\vspace{-4mm}}
 
 % Redefining space around figure captions
-\captionsetup[figure]{aboveskip=2mm, belowskip=-2mm}
+\captionsetup[figure]{aboveskip=2mm, belowskip=2mm}
 \captionsetup[subfigure]{aboveskip=2mm, belowskip=1mm}
 
 % Spacing around headings
@@ -57,14 +74,22 @@
 \setlength{\parindent}{0mm} % Start of paragraph line indent
 \setlength{\skip\footins}{5mm} % Footnotes
 
-\makeatletter
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-	{-2.5ex\@plus -1ex \@minus -0.25ex}%
-	{1.25ex \@plus 0.25ex}%
-	{\normalfont\normalsize\bfseries}}
-\makeatother
-\let\oldthesubsection\thesubsection
 
+% #####  #####
+
+
+% ##### LINKS AND REFERENCING #####
+
+% Subfigure numbering
+\renewcommand{\thesubfigure}{\alph{subfigure}}
+
+% Table of contents
+\newcommand{\tocsection}[1]{%
+	\refstepcounter{section}%
+	\addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+}
+
+% Link colors and formatting
 \hypersetup{
 	colorlinks = true, % Colours links instead of ugly boxes
 	urlcolor = blue,
@@ -72,7 +97,7 @@
 	citecolor = blue,
 }
 
-% Dark mode
+% ##### DARK MODE #####
 
 \definecolor{dark}{HTML}{363636}
 \definecolor{light}{HTML}{f5f5f5}
@@ -96,7 +121,7 @@
 	}
 }
 
-% Make hints environment.
+% ##### HINTS ENVIRONMENT #####
 \makeatletter
 
 \newif\ifhashints
@@ -127,12 +152,23 @@
 
 \makeatother
 
+
+% ##### OTHER #####
+
+% Penalties
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Fix footnotes in dynamic environments
 \AtBeginDocument{
 	\ifprintanswers
 	\makesavenoteenv{hints}
 	\makesavenoteenv{solution}
 	\fi
 }
+
+
+% ##### TIKZ #####
 
 % Define arrow on part of the line
 % For example \path[->-=0.5] (A) -- (B)

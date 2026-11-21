@@ -3,61 +3,51 @@
 
 Find the centre of mass of a plane.
 
-\begin{parts}
-
-\part Expected solution: Students use moments to find the centre of mass. They may only look at it in one dimension.
-
 \begin{hints}
-
-\begin{itemize}
-    \item What is meant by the 'centre of mass' of an object?
-    \item What forces are acting on the plane?
-    \item Can you use moments?
-\end{itemize}
-
+	\begin{itemize}
+	    \item What is meant by the ``centre of mass" of an object?
+	    \item What forces are acting on the plane?
+	    \item Can you use moments?
+	    \item Approximate the plane as perfectly symmetrical to reduce the problem to two dimensions.
+	\end{itemize}
 \end{hints}
 
 \begin{solution}
-
-A good starting point is to recognise that the centre of mass is the point at which the total mass of the aircraft can be considered to act. 
-
-If the aircraft is modelled as a collection of discrete components, and the mass and position of every component are known, then the centre of mass can be calculated as the mass-weighted average of their positions. 
-
-For the longitudinal direction, 
-
-\begin{equation}
-x_{\mathrm{CM}} = \frac{\sum_i m_i x_i}{\sum_i m_i}
-\end{equation}
-
-where:
-\begin{itemize} 
-    \item \(m_i\) is the mass of component \(i\), 
-    \item \(x_i\) is the position of component \(i\) relative to a chosen datum. 
-\end{itemize} 
-
-Similarly, the other two coordinates of the centre of mass are 
-
-\begin{equation}
-	y_{\mathrm{CM}} = \frac{\sum_i m_i y_i}{\sum_i m_i} \quad \text{and} \quad z_{\mathrm{CM}} = \frac{\sum_i m_i z_i}{\sum_i m_i}.
-\end{equation}
-
-Therefore, the three-dimensional centre of mass can be written as 
-
-\begin{equation}
-	\mathbf{r}_{\mathrm{CM}} = \frac{\sum_i m_i \mathbf{r}_i}{\sum_i m_i}.
-\end{equation}
+	
+	A good starting point is to recognise that the centre of mass is the point at which the total mass of the aircraft can be considered to act. 
+	
+	If the aircraft is modelled as a collection of discrete components, and the mass and position of every component are known, then the centre of mass can be calculated as the mass-weighted average of their positions. 
+	
+	For the longitudinal direction,
+	\begin{equation}
+	x_{\mathrm{CM}} = \frac{\sum_i m_i x_i}{\sum_i m_i}
+	\end{equation}
+	
+	where:
+	\begin{itemize} 
+	    \item \(m_i\) is the mass of component \(i\), 
+	    \item \(x_i\) is the position of component \(i\) relative to a chosen datum. 
+	\end{itemize} 
+	
+	Similarly, the other two coordinates of the centre of mass are 
+	\begin{equation}
+		y_{\mathrm{CM}} = \frac{\sum_i m_i y_i}{\sum_i m_i} \quad \text{and} \quad z_{\mathrm{CM}} = \frac{\sum_i m_i z_i}{\sum_i m_i}.
+	\end{equation}
+	
+	Therefore, the three-dimensional centre of mass can be written as 
+	\begin{equation}
+		\mathbf{r}_{\mathrm{CM}} = \frac{\sum_i m_i \mathbf{r}_i}{\sum_i m_i}.
+	\end{equation}
+	
+	Although the approach mentioned before is theoretically correct, calculating the centre of mass of a complete aircraft in this way would be difficult in practice. It would require knowledge of the mass and position of every significant component, including the following:
+	
+	\begin{itemize} 
+		\item fuselage and structural members, 
+		\item wings and tail, \item engines, 
+		\item landing gear, 
+		\item fuel, 
+		\item passengers and baggage, 
+		\item electrical and mechanical systems. 
+	\end{itemize}
 
 \end{solution}
-
-\part Although the approach mentioned before is theoretically correct, calculating the centre of mass of a complete aircraft in this way would be difficult in practice. It would require knowledge of the mass and position of every significant component, including the following:
-
-\begin{itemize} 
-    \item fuselage and structural members, 
-    \item wings and tail, \item engines, 
-    \item landing gear, 
-    \item fuel, 
-    \item passengers and baggage, 
-    \item electrical and mechanical systems. 
-\end{itemize}
-
-\end{parts}

@@ -4,64 +4,61 @@
 How many equilateral triangles can be formed by connecting three vertices of a cube?
 
 \begin{hints}
-
-\begin{enumerate}
-	\item Explore the problem. For example, if one of the edges of the cube is included in the triangle, what are the possible triangles you get by adding one of the other vertices?
-	\item Be careful not to double-count triangles.
-	\item If a triangle shares an edge with the cube, it must be a right-angled triangle.
-	\item Equilateral triangles have rotational symmetry of order 3 - where on a cube do you find such a symmetry?
-\end{enumerate}
-
+	\begin{enumerate}
+		\item Explore the problem. For example, if one of the edges of the cube is included in the triangle, what are the possible triangles you get by adding one of the other vertices?
+		\item Be careful not to double-count triangles.
+		\item If a triangle shares an edge with the cube, it must be a right-angled triangle.
+		\item Equilateral triangles have rotational symmetry of order 3 - where on a cube do you find such a symmetry?
+	\end{enumerate}
 \end{hints}
 
 \begin{solution}
 	
 	Place three points overlapping at a vertex of the cube. There are three edges connected to this vertex, and we move the points along each of the edges. If all points move along their edge at the same rate then they will form an equilateral triangle by symmetry. Eventually they hit the vertex at the end of the edge, and thus we have found three vertices that form an equilateral triangle. We note that each triangle generated this way cannot be reached by starting at any other vertex, thus we have one triangle per vertex\footnote{Note that each vertex will give a unique triangle. If you glue two tetrahedra together at the base then doing this process with the two vertices opposite to this face will give the same triangle for example.} and the final answer is at least 8. This process is demonstrated in figure~\ref{fig:TrianglesInACube_MovingAwayFromVertex}. The red triangle shows the intermediate step where the points are partially along the edges and the blue triangle shows where it stops.
 	
-	\begin{figure}[H]
-		\begin{center}
-			\begin{tikzpicture}[scale=4]
-				
-				\input{TrianglesInACube_CubeCoordinates}
-				
-				\def\d{0.4}
-				\coordinate (T1) at (\d,1,1);
-				\coordinate (T2) at (1,\d,1);
-				\coordinate (T3) at (1,1,\d);
-				
-				\filldraw[
-				fill=blue!40,
-				draw=dark,
-				blend mode=normal,
-				fill opacity=0.4
-				] (011) -- (101) -- (110) -- cycle;
-				
-				\filldraw[
-				fill=red!40,
-				draw=dark,
-				blend mode=normal,
-				fill opacity=0.4
-				] (T1) -- (T2) -- (T3) -- cycle;
-				
-				\input{TrianglesInACube_CubeEdges}
-				
-			\end{tikzpicture}
-			\caption{Three points moving away from a vertex at the same rate form an equilateral triangle by symmetry.}
-			\label{fig:TrianglesInACube_MovingAwayFromVertex}
-		\end{center}
-	\end{figure}
+	\begin{minipage}{\linewidth}
+		\centering
+		\begin{tikzpicture}[scale=4]
+			
+			\input{TrianglesInACube_CubeCoordinates}
+			
+			\def\d{0.4}
+			\coordinate (T1) at (\d,1,1);
+			\coordinate (T2) at (1,\d,1);
+			\coordinate (T3) at (1,1,\d);
+			
+			\filldraw[
+			fill=blue!40,
+			draw=dark,
+			blend mode=normal,
+			fill opacity=0.4
+			] (011) -- (101) -- (110) -- cycle;
+			
+			\filldraw[
+			fill=red!40,
+			draw=dark,
+			blend mode=normal,
+			fill opacity=0.4
+			] (T1) -- (T2) -- (T3) -- cycle;
+			
+			\input{TrianglesInACube_CubeEdges}
+			
+		\end{tikzpicture}
+		\captionof{figure}{Three points moving away from a vertex at the same rate form an equilateral triangle by symmetry.}
+		\label{fig:TrianglesInACube_MovingAwayFromVertex}
+	\end{minipage}
 	
 	Another way of producing this lower bound is by considering symmetry. There are 24 orientation-preserving symmetries of the vertices of a cube which form the $O$ group. The vertices of an equilateral triangle have 3 orientation-preserving symmetries and form the $C_3$ group. The quotient set $O/C_3$ has size $|O / C_3| = \frac{|O|}{|C_3|} = \frac{24}{3} = 8$ which shows there are at least eight triples of vertices with threefold rotational symmetry, in other words, the equilateral triangles. This is only a lower bound because we could have shapes such as two cubes next to each other that share a face. This shape has 8 symmetries which is not a multiple of three, yet clearly it has at least 16 equilateral triangles in it.
 	
-	We now need to confirm that these are the only such triangles. We note that if an edge of the cube is included then the triangle cannot be equilateral as this would need one cube faces to be a triangle. There are only two other candidates for a triangle edges we can use - the face diagonals and the cube diagonal, of which only the former works\footnote{The eight vertices can be decomposed into four disjoint pairs where each pair is included by the same cube diagonal.}. The remaining triangles lie inside the interior of the cube (apart from the triangle boundary) and are of the same type\footnote{In this case it means that we can do orthogonal flips or rotate the cube in multiples of a quarter turn to map one triangle onto another such triangle. This forms an equivalence relation which decomposes a set into disjoint sets of elements that are all equivalent to each other called equivalence classes.}.
+	We now need to confirm that these are the only such triangles. We note that if an edge of the cube is included then the triangle cannot be equilateral as this would need a cube face to be a triangle. There are only two other candidates for a triangle edges we can use - the face diagonals and the cube diagonal, of which only the former works\footnote{The eight vertices can be decomposed into four disjoint pairs where each pair is included by the same cube diagonal.}. The remaining triangles lie inside the interior of the cube (excluding the triangle boundary) and are of the same type\footnote{In this case it means that we can do orthogonal flips or rotate the cube in multiples of a quarter turn to map one triangle onto another such triangle. This forms an equivalence relation which decomposes a set into disjoint sets of elements that are all equivalent to each other called equivalence classes.}.
 	
 	If a triangle of this form passes through a given vertex, there are three choices where the last two vertex can go. This means there are three such triangles which include that vertex. Multiplying by 8 for the 8 different vertices we get 24 triangles, although we have over-counted. We know exactly how much we have over-counted however - each triangle has three vertices, so dividing by three gives the number of distinct triangles.
 	
 	While more verbose, we can also confirm that the triangles associated with each vertex are the only such equilateral triangles by classifying all triangles within the cube. If we have lower bounds for all types of triangle which sum to the total number of triangles then our bounds must be tight. All three types of triangle\footnote{To systematically cover the different cases it is useful to consider a notion of distance between two vertices defined as the minimum number of edges that need to be traversed to travel between the vertices.} are summarised in table~\ref{tab:TrianglesInACube_EnumeratingTriangles} and shown in figure~\ref{fig:TrianglesInACube_Cases}.
 	
-	\begin{table}[H]
+	\begin{minipage}{\linewidth}
 		\centering
-		\caption{Enumerating all possible triangles formed by connecting vertices of a cube.}
+		\captionof{table}{Enumerating all possible triangles formed by connecting vertices of a cube.}
 		\label{tab:TrianglesInACube_EnumeratingTriangles}
 		\begin{tabular}{cc}
 			\toprule
@@ -74,10 +71,14 @@ How many equilateral triangles can be formed by connecting three vertices of a c
 			Total & ${{8}\choose{3}} = 56$ \\
 			\bottomrule
 		\end{tabular}
-	\end{table}
+	\end{minipage}
 	
-	\begin{figure}[H]
-		\begin{subfigure}{0.33\textwidth}
+	\vspace{3ex}
+	
+	\begin{minipage}{\linewidth}
+		\centering
+		\captionsetup{type=figure}
+		\begin{minipage}{0.33\linewidth}
 			\centering
 			\begin{tikzpicture}[scale=3]
 				
@@ -86,10 +87,10 @@ How many equilateral triangles can be formed by connecting three vertices of a c
 				\filldraw[fill=blue!40, draw=dark, fill opacity=0.4] (001) -- (101) -- (011) -- (001);
 				
 			\end{tikzpicture}
-			\caption{Contained within a face}
+			\subcaption{Contained within a face}
 			\label{fig:TrianglesInACube_Case1}
-		\end{subfigure}%
-		\begin{subfigure}{0.33\textwidth}
+		\end{minipage}%
+		\begin{minipage}{0.33\linewidth}
 			\centering
 			\begin{tikzpicture}[scale=3]
 				
@@ -98,10 +99,10 @@ How many equilateral triangles can be formed by connecting three vertices of a c
 				\filldraw[fill=blue!40, draw=dark, fill opacity=0.4] (001) -- (101) -- (010) -- (001);
 				
 			\end{tikzpicture}
-			\caption{Only one edge within a face}
+			\subcaption{Only one edge within a face}
 			\label{fig:TrianglesInACube_Case2}
-		\end{subfigure}%
-		\begin{subfigure}{0.33\textwidth}
+		\end{minipage}%
+		\begin{minipage}{0.33\linewidth}
 			\centering
 			\begin{tikzpicture}[scale=3]
 				
@@ -110,11 +111,11 @@ How many equilateral triangles can be formed by connecting three vertices of a c
 				\filldraw[fill=blue!40, draw=dark, fill opacity=0.4] (001) -- (111) -- (010) -- (001);
 				
 			\end{tikzpicture}
-			\caption{Contained inside cube}
+			\subcaption{Contained inside cube}
 			\label{fig:TrianglesInACube_Case3}
-		\end{subfigure}
-		\caption{Examples of the three distinct ways a triangle can be inscribed within a cube.}
+		\end{minipage}
+		\captionof{figure}{Examples of the three distinct ways a triangle can be inscribed within a cube.}
 		\label{fig:TrianglesInACube_Cases}
-	\end{figure}
+	\end{minipage}
 
 \end{solution}

@@ -89,10 +89,12 @@ Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued f
 	
 		As both $p$ and $q$ are interpolating polynomials, $p(x_i) - q(x_i) = 0$ for all $x_i$. As $p(x) - q(x)$ is of degree $n$ and has roots at $n + 1$ points, it must be identically 0. This can be seen by the factor theorem as $p(x) - q(x) = \prod_{i=0}^n \lambda (x - x_i)$ for some $\lambda \in \mathbb{R}$, yet for $\lambda \ne 0$ the right hand side has degree $n + 1$. We conclude that $\lambda = 0$ and that $p(x) = q(x)$.
 		
-		If there is some polynomial, $p$, that interpolates $f$ at $n + 1$ points then it necessarily agrees with the interpolating polynomial of minimal degree at these points. By the previous argument we must have that $p$ is identically equal to the polynomial of minimal degree.
+		If there is some polynomial, $p$, that interpolates $f$ at $n + 1$ points then it necessarily agrees with the interpolating polynomial of minimal degree at these points. By the previous argument we must have that $p$ is identically equal to the polynomial of minimal degree by uniqueness.
 	
 	\end{solution}
 
+	\ifprintanswers
+	\needspace{5\baselineskip}
 	\part (Bonus) Now restrict to points with integer coordinates and polynomials with integer coefficients. Give an example where there is no such interpolating polynomial. Classify exactly when such an interpolating polynomial exists for the case where the the $x_i$ are consecutive integers.
 	
 	\begin{solution}
@@ -104,9 +106,12 @@ Given $n + 1$ real numbers, $x_0, x_1, \dots, x_{n-1}, x_n$, and a real-valued f
 			(a + 1)^k - a^k = \left( \sum_{i=0}^k {k \choose i} a^i \right) - a^k = k a^{k - 1} + \sum_{i=0}^{k - 2} {k \choose i} a^i
 			\label{eqn:InterpolatingPolynomials_DifferenceInPowers}
 		\end{equation}
+		We now introduce the idea of differencing a sequence. We take a sequence of length $m$ and find the difference between successive terms to make a new sequence of length $m - 1$. Call this sequence the first order differences. In particular we note that if the original sequence could be interpolated by a degree $k$ polynomial if and only if the sequence of first order differences can be interpolated by a degree $k - 1$ polynomial.
 		
-		We now introduce the idea of differencing a sequence. We take a sequence of length $m$ and find the difference between successive terms to make a new sequence of length $m - 1$. Call this sequence the first order differences. In particular we note that if the original sequence could be interpolated by a degree $k$ polynomial then the sequence of first order differences can be interpolated by a degree $k - 1$ polynomial. 
+		If we difference the first order differences then we get the sequence of second order differences and this process can repeat to get the sequence of $k$th order differences. As we are interested in polynomials, it will be instructive to look at differencing the sequence $(n^k)_{n \in \mathbb{N}}$. From equation~\eqref{eqn:InterpolatingPolynomials_DifferenceInPowers} we can see by induction that the $k$th order differences is the constant sequence $k!$. 
 		
 	\end{solution}
+
+	\fi
 
 \end{parts}
