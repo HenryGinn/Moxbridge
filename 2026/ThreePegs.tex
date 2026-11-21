@@ -6,9 +6,10 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 \def\dotradius{0.05}
 \def\pegradius{0.2}
 
-\begin{figure}[H]
+\begin{minipage}{\linewidth}
 	\centering
-	\begin{subfigure}{0.49\textwidth}
+	\captionsetup{type=figure}
+	\begin{minipage}{0.49\linewidth}
 		\centering
 		\begin{tikzpicture}[scale=0.8]
 			\foreach \x in {0,1,...,7}{
@@ -20,11 +21,11 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 			\fill[color=blue!60, blend mode=normal] (3,3) circle (\pegradius);
 			\fill[color=blue!60, blend mode=normal] (4,2) circle (\pegradius);
 		\end{tikzpicture}
-		\caption{Problem setup}
+		\subcaption{Problem setup}
 		\label{fig:ThreePegsOnASquare_Problem}
-	\end{subfigure}
+	\end{minipage}
 	\hfill
-	\begin{subfigure}{0.49\textwidth}
+	\begin{minipage}{0.49\linewidth}
 		\centering
 		\begin{tikzpicture}[scale=0.8]
 			\foreach \x in {0,1,...,7}{
@@ -40,12 +41,12 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 			\draw[|<->|] ($(2,4)!0.15!(3,2)$) -- ($(2,4)!0.85!(3,2)$);
 			\draw[|<->|] ($(3,2)!0.15!(4,0)$) -- ($(3,2)!0.85!(4,0)$);
 		\end{tikzpicture}
-		\caption{Example move}
+		\subcaption{Example move}
 		\label{fig:ThreePegsOnASquare_MoveDefinition}
-	\end{subfigure}
-	\caption{The three pegs on a square problem}
+	\end{minipage}
+	\captionof{figure}{The three pegs on a square problem}
 	\label{fig:ThreePegsOnASquare}
-\end{figure}
+\end{minipage}
 
 \begin{parts}
 
@@ -60,7 +61,7 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 	\end{hints}
 	
 	\begin{solution}
-		
+	
 		If peg~$i$ is jumped over peg~$j$, we define the base of the triangle to be the vector from peg~$i$ to peg~$j$. The altitude of the triangle is the perpendicular height to the third peg from the line that passes through pegs~$i$ and~$j$. After peg~$i$ has been moved, the altitude remains the same because peg~$i$ and peg~$j$ define the same line as before. The length of the base is also the same by definition of a move, and therefore the area is preserved.
 	
 	\end{solution}
@@ -91,7 +92,6 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 			\end{alignedat}
 			\label{eqn:ThreePegsOnASquare_PositionMod2}
 		\end{equation}
-		
 		This shows that the position of a point of type $i$ modulo 2 is preserved. All of the initial pegs had different positions modulo 2, proving that a peg of type~$i$ can never land on a point of type~$j \ne i$. By our previous comments.
 	
 	\end{solution}
@@ -100,16 +100,16 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 	
 	\begin{hints}
 		\begin{enumerate}
-			\item The previous solution showed that the parity of a peg cannot change which limits the set of points that can be reached. It has not been proved that all points with the same parity can be reached.
+			\item The previous solution showed that the parity of a peg cannot change. It has not been proved that all points with the same parity can be reached.
 			\item It is true that all points with the same parity can be reached.
 			\item It is sufficient to show that the starting configuration can be moved two units in each of the cardinal directions.
 		\end{enumerate}
 	\end{hints}
 	
 	\begin{solution}
-		
-		In the solution presented to part~\ref{que:ThreePegsOnASquare_LastCorner} we hypothesized that the pattern of how points repeated every two units in each direction, but never proved this fact. We showed that the pattern could not repeat in any direction by any number not divisible by 2. The pattern does in fact repeat every two units. First we simplify the problem. Suppose that there exists a sequence of moves that results in the original pattern of three pegs being moved to the right by two units. The we make the following observations.
 	
+		In the solution presented to part~\ref{que:ThreePegsOnASquare_LastCorner} we hypothesized that the pattern of how points repeated every two units in each direction, but never proved this fact. We showed that the pattern could not repeat in any direction by any number not divisible by 2. The pattern does in fact repeat every two units. First we simplify the problem. Suppose that there exists a sequence of moves that results in the original pattern of three pegs being moved to the right by two units. The we make the following observations.
+		
 		\begin{enumerate}
 			\item There exists a mirror of symmetry that cuts diagonally through the original peg positions, therefore if the three pegs can be moved to the right by two units then they can be moved up by the same sequence performed when mirrored.
 			\item The moves are reversible so if the pegs can move right by two then they can move left by two, and likewise for moving up and down by two.
@@ -124,9 +124,11 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 			\item Move the peg at (1, 0) over the peg at (2, 0) to (3, 0).
 			\item Move the peg at (2, -1) over the peg at (2, 0) to (2, 1).
 		\end{enumerate}
-	
-		\begin{figure}[H]
-			\begin{subfigure}{0.24\textwidth}
+		
+		\begin{minipage}{\linewidth}
+			\centering
+			\captionsetup{type=figure}
+			\begin{minipage}{0.24\linewidth}
 				\centering
 				\begin{tikzpicture}[scale=0.6]
 					\foreach \x in {1,2,...,6}{
@@ -141,10 +143,10 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 					\fill[color=blue!60, blend mode=normal] (3,2) circle (\pegradius);
 					
 				\end{tikzpicture}
-				\caption{Move 1}
-			\end{subfigure}
+				\subcaption{Move 1}
+			\end{minipage}
 			\hfill
-			\begin{subfigure}{0.24\textwidth}
+			\begin{minipage}{0.24\linewidth}
 				\centering
 				\begin{tikzpicture}[scale=0.6]
 					\foreach \x in {1,2,...,6}{
@@ -159,9 +161,9 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 					\fill[color=blue!60, blend mode=normal] (3,2) circle (\pegradius);
 					
 				\end{tikzpicture}
-				\caption{Move 2}
-			\end{subfigure}
-			\begin{subfigure}{0.24\textwidth}
+				\subcaption{Move 2}
+			\end{minipage}
+			\begin{minipage}{0.24\linewidth}
 				\centering
 				\begin{tikzpicture}[scale=0.6]
 					\foreach \x in {1,2,...,6}{
@@ -176,10 +178,10 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 					\fill[color=blue!60, blend mode=normal] (3,2) circle (\pegradius);
 					
 				\end{tikzpicture}
-				\caption{Move 3}
-			\end{subfigure}
+				\subcaption{Move 3}
+			\end{minipage}
 			\hfill
-			\begin{subfigure}{0.24\textwidth}
+			\begin{minipage}{0.24\linewidth}
 				\centering
 				\begin{tikzpicture}[scale=0.6]
 					\foreach \x in {1,2,...,6}{
@@ -194,11 +196,11 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 					\fill[color=blue!60, blend mode=normal] (5,2) circle (\pegradius);
 					
 				\end{tikzpicture}
-				\caption{Move 4}
-			\end{subfigure}
-			\caption{Moving the initial configuration to the right by two units.}
+				\subcaption{Move 4}
+			\end{minipage}
+			\captionof{figure}{Moving the initial configuration to the right by two units.}
 			\label{fig:ThreePegsOnASquare_MoveInitialConfiguration}
-		\end{figure}
+		\end{minipage}
 	
 	\end{solution}
 	
@@ -224,15 +226,6 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 	
 	\part \label{que:ThreePegsOnASquare_CharacteriseInGeneral} Consider a three-dimensional infinite lattice with pegs at $(1, 0, 0)$, $(0, 1, 0)$, and $(0, 0, 1)$. How does the characterisation of reachable lattice points differ from part~\ref{que:ThreePegsOnASquare_CharacteriseHigherDimensional}? Hence conjecture what the characterisation might be for any starting configuration of pegs on an $n$-dimensional infinite lattice. Can you prove this?
 	
-	\begin{hints}
-		\begin{enumerate}
-			\item Consider the plane that the pegs lie within - prove that the pegs cannot leave this plane.
-			\item There is a two-dimensional lattice that the three pegs at $(1, 0, 0)$, $(0, 1, 0)$, and $(0, 0, 1)$ lie on.
-			\item What directions can an initial configuration move in and by how far?
-			\item To prove your conjecture you need to demonstrate two things. First that the points described by the characterisation are reachable, and second, any points that are not described by your characterisation are not reachable. The second direction is easier.
-		\end{enumerate}
-	\end{hints}
-	
 	\begin{solution}
 	
 		We cannot do the same proof as in part~\ref{que:ThreePegsOnASquare_CharacteriseHigherDimensional} because we no longer have a peg at the origin. The three pegs define the plane and all moves keep the pegs within that plane. This is because the vector that each peg moves by is necessarily contained within the plane by definition of a move. If we restrict the lattice to only the points contained within the same plane as the pegs then we see they form a two-dimensional lattice. The same result as in part~\ref{que:ThreePegsOnASquare_CharacteriseInitialProblem} gives the characterisation in this case, but restricted to this new lattice.
@@ -245,7 +238,7 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 		
 		The general case where pegs can have the same parity is more complicated, but we can apply a similar idea to the simple case. If we cannot jump peg $P_3$ over $P_1$ we can move $P_1$ or $P_2$ and try again, let us say we jump $P_1$ over $P_2$ and relabel it peg $P'_1$. We can apply the same method as before but with pegs $P_2$ and $P'_1$ instead of pegs $P_1$ and $P_2$. The vector from $P_1$ to $P_2$ is the same as the vector from $P_2$ to $P'_1$ so $P_3$ will be moved by the same amount. If this does not work then we can keep jumping pegs $P_1$ and $P_2$ over each other until they are far away.
 		
-		We still need to prove that this process works and is always possible. There are potential problems.
+		We still need to prove that this process works and is always possible for it to be well-posed. There are two potential problems.
 		\begin{enumerate}
 			\item Is this process of flipping $P_1$ and $P_2$ guaranteed to work after finitely many time steps? That is, could we get stuck in a loop where no matter how many times we flip $P_1$ and $P_2$ over each other, there is always some other peg that gets in the way.
 			\item Can we always flip $P_1$ and $P_2$ over each other?
@@ -253,9 +246,9 @@ There is an infinite square grid of lattice points. There are three pegs on thre
 		
 		If we have finitely many pegs, let us say $n$, then the answer to the first statement is yes. After each flip of $P_1$ and $P_2$, the result of flipping $P_3$ over each of $P_1$ and $P_2$ must be different. This means that after $2n$ total flips, alternating between $P_1$ and $P_2$, we must have reached some state where all moves involving $P_3$ were well-defined by the pigeonhole principle. $P_1$ and $P_2$ can then retrace their steps and return to their original positions.
 		
-		For $P_1$ not to be able to flip over $P_2$ there must exist some peg, $P_4$ that is an equal distance away from $P_2$ as $P_1$ but in the opposite direction. If this is the case then we can use $P_2$ and $P_4$ instead of $P_1$ and $P_2$ as they necessarily have the same vector between them.
+		For $P_1$ not to be able to flip over $P_2$ there must exist some peg, $P_4$ that is an equal distance away from $P_2$ as $P_1$ but in the opposite direction that $P_2$ is from $P_1$. If this is the case then we can use $P_2$ and $P_4$ instead of $P_1$ and $P_2$ as they necessarily have the same vector between them.
 		
-		The situation with infinitely many pegs or pegs on an infinite dimensional lattice is more complicated due to potential issues about convergence and is therefore not covered here. We note that having infintely many pegs does not necessarily make the situation more complicated. Consider a one-dimensional lattice with pegs at even-numbered positions and one peg at an odd-numbered position - here it is clear that all points are reachable.
+		The situation with infinitely many pegs or pegs on an infinite dimensional lattice is more complicated due to potential issues about convergence and is therefore not covered here. We note that having infinitely many pegs does not necessarily make the situation more complicated. Consider a one-dimensional lattice with pegs at even-numbered positions and one peg at an odd-numbered position - here it is clear that all coordinates with the same parity as this odd-numbered peg are reachable.
 	
 	\end{solution}
 
